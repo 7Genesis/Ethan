@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "116870087879",
+    "project_id": "cotahub-brasil-genesis",
+    "storage_bucket": "cotahub-brasil-genesis.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116870087879:android:84ef17373cffed6745aae2",
+        "android_client_info": {
+          "package_name": "com.example.cotahub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtv4MH5t-fIEHG06-Ouqvn-iAdzdRAjE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
