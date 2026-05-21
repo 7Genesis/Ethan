@@ -1,0 +1,624 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userPath(userId) {
+      return /databases/$(database)/documents/users/$(userId);
+    }
+
+    function quotationPath(quotationId) {
+      return /databases/$(database)/documents/quotations/$(quotationId);
+    }
+
+    function proposalPath(proposalId) {
+      return /databases/$(database)/documents/proposals/$(proposalId);
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function userDoc(userId) {
+      return get(userPath(userId));
+    }
+
+    function quotationDoc(quotationId) {
+      return get(quotationPath(quotationId));
+    }
+
+    function proposalDoc(proposalId) {
+      return get(proposalPath(proposalId));
+    }
+
+    function currentUserExists() {
+      return isSignedIn() && exists(userPath(request.auth.uid));
+    }
+
+    function currentUserRole() {
+      return currentUserExists() ? userDoc(request.auth.uid).data.role : '';
+    }
+
+    function isBuyer() {
+      return currentUserRole() == 'buyer';
+    }
+
+    function isSupplier() {
+      return currentUserRole() == 'supplier';
+    }
+
+    function isRole(value) {
+      return value in ['buyer', 'supplier'];
+    }
+
+    function isEntityType(value) {
+      return value in ['legal', 'individual'];
+    }
+
+    function isCompanyDocumentType(value) {
+      return value in ['cnpj', 'cpf'];
+    }
+
+    function isIdentityVerificationStatus(value) {
+      return value in ['pending', 'verified', 'rejected'];
+    }
+
+    function isRegistrationStage(value) {
+      return value in ['seeded', 'profile_completed', 'active'];
+    }
+
+    function nonEmptyString(value) {
+      return value is string && value.size() > 0;
+    }
+
+    function isStringOrTimestamp(value) {
+      return value is string || value is timestamp;
+    }
+
+    function isProfileCompleted(userId) {
+      return exists(userPath(userId))
+        && userDoc(userId).data.profileCompleted == true
+        && userDoc(userId).data.registrationStage == 'active'
+        && userDoc(userId).data.identityVerificationStatus == 'verified';
+    }
+
+    function isDigits(value, length) {
+      return value is string
+        && value.size() == length
+        && value.matches('^[0-9]+$');
+    }
+
+    function hasValidCompanyDocument(data) {
+      return (
+        data.companyDocumentType == 'cnpj'
+        && isDigits(data.companyTaxId, 14)
+      ) || (
+        data.companyDocumentType == 'cpf'
+        && isDigits(data.companyTaxId, 11)
+      );
+    }
+
+    function hasFullIdentity(data) {
+      return nonEmptyString(data.companyName)
+        && nonEmptyString(data.companyLegalName)
+        && hasValidCompanyDocument(data)
+        && isDigits(data.companyPhone, 11)
+        && data.companyEmail is string
+        && data.companyEmail.matches('^.+@.+\\..+$')
+        && nonEmptyString(data.buyerName)
+        && nonEmptyString(data.buyerRoleTitle)
+        && isDigits(data.buyerDocument, 11)
+        && isDigits(data.buyerPhone, 11);
+    }
+
+    function validUserKeys(data) {
+      return data.keys().hasOnly([
+        'email',
+        'role',
+        'companyName',
+        'companyLegalName',
+        'companyTaxId',
+        'companyPhone',
+        'companyEmail',
+        'entityType',
+        'companyDocumentType',
+        'identityVerificationStatus',
+        'registrationStage',
+        'buyerName',
+        'buyerRoleTitle',
+        'buyerDocument',
+        'buyerPhone',
+        'profileCompleted',
+        'profileCompletedAt',
+        'createdAt',
+        'updatedAt'
+      ]);
+    }
+
+    function hasUserRequiredKeys(data) {
+      return data.keys().hasAll([
+        'email',
+        'role',
+        'companyName',
+        'companyLegalName',
+        'companyTaxId',
+        'companyPhone',
+        'companyEmail',
+        'entityType',
+        'companyDocumentType',
+        'identityVerificationStatus',
+        'registrationStage',
+        'buyerName',
+        'buyerRoleTitle',
+        'buyerDocument',
+        'buyerPhone',
+        'profileCompleted',
+        'profileCompletedAt',
+        'createdAt',
+        'updatedAt'
+      ]);
+    }
+
+    function validUserTypes(data) {
+      return data.email is string
+        && data.role is string
+        && data.companyName is string
+        && data.companyLegalName is string
+        && data.companyTaxId is string
+        && data.companyPhone is string
+        && data.companyEmail is string
+        && data.entityType is string
+        && data.companyDocumentType is string
+        && data.identityVerificationStatus is string
+        && data.registrationStage is string
+        && data.buyerName is string
+        && data.buyerRoleTitle is string
+        && data.buyerDocument is string
+        && data.buyerPhone is string
+        && data.profileCompleted is bool
+        && (data.profileCompletedAt == null || data.profileCompletedAt is timestamp)
+        && isStringOrTimestamp(data.createdAt)
+        && isStringOrTimestamp(data.updatedAt);
+    }
+
+    function isQuotationBuyer(quotationId) {
+      return isSignedIn()
+        && exists(quotationPath(quotationId))
+        && quotationDoc(quotationId).data.buyerId == request.auth.uid;
+    }
+
+    function isQuotationSelectedSupplier(quotationId) {
+      return isSignedIn()
+        && exists(quotationPath(quotationId))
+        && quotationDoc(quotationId).data.selectedSupplierId == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+
+      allow create: if isOwner(userId)
+        && validUserKeys(request.resource.data)
+        && validUserTypes(request.resource.data)
+        && isRole(request.resource.data.role)
+        && isEntityType(request.resource.data.entityType)
+        && isCompanyDocumentType(request.resource.data.companyDocumentType)
+        && isIdentityVerificationStatus(request.resource.data.identityVerificationStatus)
+        && isRegistrationStage(request.resource.data.registrationStage)
+        && (
+          request.resource.data.profileCompleted == false
+          || hasFullIdentity(request.resource.data)
+        );
+
+      allow update: if isOwner(userId)
+        && hasUserRequiredKeys(request.resource.data)
+        && validUserTypes(request.resource.data)
+        && isRole(request.resource.data.role)
+        && isEntityType(request.resource.data.entityType)
+        && isCompanyDocumentType(request.resource.data.companyDocumentType)
+        && isIdentityVerificationStatus(request.resource.data.identityVerificationStatus)
+        && isRegistrationStage(request.resource.data.registrationStage)
+        && (
+          resource.data.profileCompleted == true
+          ? request.resource.data.profileCompleted == true
+          : true
+        )
+        && (
+          resource.data.profileCompletedAt != null
+          ? request.resource.data.profileCompletedAt != null
+          : true
+        )
+        && (
+          request.resource.data.profileCompleted == false
+          || hasFullIdentity(request.resource.data)
+        )
+        && (
+          request.resource.data.profileCompleted == true
+          ? request.resource.data.registrationStage == 'active'
+          : true
+        )
+        && (
+          resource.data.registrationStage == 'active'
+          ? request.resource.data.registrationStage == 'active'
+          : true
+        );
+
+      allow delete: if false;
+
+      match /notifications/{notificationId} {
+        allow read: if isOwner(userId);
+        allow update: if isOwner(userId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'readAt'
+          ])
+          && request.resource.data.readAt is timestamp;
+        allow create: if false;
+        allow delete: if false;
+      }
+    }
+
+    match /quotations/{quotationId} {
+      function validQuotationKeys(data) {
+        return data.keys().hasOnly([
+          'product',
+          'quantity',
+          'notes',
+          'createdAt',
+          'buyerId',
+          'status',
+          'workflowStage',
+          'selectedProposalId',
+          'selectedSupplierId',
+          'closedAt',
+          'items'
+        ]);
+      }
+
+      function validQuotationTypes(data) {
+        return data.product is string
+          && data.quantity is string
+          && data.notes is string
+          && isStringOrTimestamp(data.createdAt)
+          && data.buyerId is string
+          && data.status is string
+          && data.workflowStage is string
+          && data.selectedProposalId is string
+          && data.selectedSupplierId is string
+          && (data.closedAt == null || data.closedAt is timestamp)
+          && data.items is list;
+      }
+
+      function isValidWorkflowStage(value) {
+        return value in [
+          'collecting_proposals',
+          'awaiting_invoice_xml',
+          'invoice_under_review',
+          'invoice_rejected',
+          'purchase_completed'
+        ];
+      }
+
+      function buyerCanCloseQuotation() {
+        return isQuotationBuyer(quotationId)
+          && isBuyer()
+          && isProfileCompleted(request.auth.uid)
+          && request.resource.data.buyerId == resource.data.buyerId
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'status',
+            'workflowStage',
+            'selectedProposalId',
+            'selectedSupplierId',
+            'closedAt'
+          ])
+          && resource.data.status == 'open'
+          && request.resource.data.status == 'closed'
+          && resource.data.workflowStage == 'collecting_proposals'
+          && request.resource.data.workflowStage == 'awaiting_invoice_xml'
+          && request.resource.data.selectedProposalId is string
+          && request.resource.data.selectedSupplierId is string
+          && request.resource.data.selectedProposalId.size() > 0
+          && request.resource.data.selectedSupplierId.size() > 0
+          && request.resource.data.closedAt is timestamp;
+      }
+
+      function buyerCanFinalizeWorkflow() {
+        return isQuotationBuyer(quotationId)
+          && isBuyer()
+          && request.resource.data.buyerId == resource.data.buyerId
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'workflowStage'
+          ])
+          && resource.data.status == 'closed'
+          && resource.data.workflowStage in ['invoice_under_review', 'invoice_rejected']
+          && request.resource.data.workflowStage in ['purchase_completed', 'invoice_rejected'];
+      }
+
+      function supplierCanMoveToReview() {
+        return isQuotationSelectedSupplier(quotationId)
+          && isSupplier()
+          && isProfileCompleted(request.auth.uid)
+          && request.resource.data.buyerId == resource.data.buyerId
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'workflowStage'
+          ])
+          && resource.data.status == 'closed'
+          && resource.data.workflowStage in ['awaiting_invoice_xml', 'invoice_rejected', 'invoice_under_review']
+          && request.resource.data.workflowStage == 'invoice_under_review';
+      }
+
+      allow read: if isSignedIn()
+        && (
+          resource.data.buyerId == request.auth.uid
+          || (
+            isSupplier()
+            && (
+              resource.data.status == 'open'
+              || resource.data.selectedSupplierId == request.auth.uid
+            )
+          )
+        );
+
+      allow create: if isBuyer()
+        && isProfileCompleted(request.auth.uid)
+        && validQuotationKeys(request.resource.data)
+        && validQuotationTypes(request.resource.data)
+        && isValidWorkflowStage(request.resource.data.workflowStage)
+        && request.resource.data.buyerId == request.auth.uid
+        && request.resource.data.status == 'open'
+        && request.resource.data.workflowStage == 'collecting_proposals'
+        && request.resource.data.selectedProposalId == ''
+        && request.resource.data.selectedSupplierId == ''
+        && request.resource.data.closedAt == null;
+
+      allow update: if validQuotationKeys(request.resource.data)
+        && validQuotationTypes(request.resource.data)
+        && isValidWorkflowStage(request.resource.data.workflowStage)
+        && (buyerCanCloseQuotation()
+          || buyerCanFinalizeWorkflow()
+          || supplierCanMoveToReview());
+
+      allow delete: if false;
+
+      match /invoiceXmls/{proposalId} {
+        function validInvoiceKeys(data) {
+          return data.keys().hasOnly([
+            'quotationId',
+            'proposalId',
+            'supplierId',
+            'supplierName',
+            'fileName',
+            'storagePath',
+            'downloadUrl',
+            'invoiceKey',
+            'issuerName',
+            'issuerTaxId',
+            'recipientName',
+            'recipientTaxId',
+            'buyerCompanyName',
+            'buyerCompanyTaxId',
+            'recipientMatchStatus',
+            'totalAmount',
+            'proposalAmount',
+            'consistencyStatus',
+            'consistencyIssues',
+            'issueDate',
+            'uploadedAt',
+            'reviewStatus',
+            'reviewNote',
+            'reviewedAt',
+            'reviewedBy'
+          ]);
+        }
+
+        function validInvoiceTypes(data) {
+          return data.quotationId is string
+            && data.proposalId is string
+            && data.supplierId is string
+            && data.supplierName is string
+            && data.fileName is string
+            && data.storagePath is string
+            && data.downloadUrl is string
+            && data.invoiceKey is string
+            && data.issuerName is string
+            && data.issuerTaxId is string
+            && data.recipientName is string
+            && data.recipientTaxId is string
+            && data.buyerCompanyName is string
+            && data.buyerCompanyTaxId is string
+            && data.recipientMatchStatus in ['matched', 'mismatch', 'unknown']
+            && data.totalAmount is number
+            && data.proposalAmount is number
+            && data.consistencyStatus in ['pass', 'warning', 'fail', 'unknown']
+            && data.consistencyIssues is list
+            && (data.issueDate == null || data.issueDate is timestamp)
+            && data.uploadedAt is timestamp
+            && data.reviewStatus in ['pending_review', 'verified', 'rejected']
+            && data.reviewNote is string
+            && (data.reviewedAt == null || data.reviewedAt is timestamp)
+            && (data.reviewedBy == null || data.reviewedBy is string);
+        }
+
+        function canSupplierWriteInvoice() {
+          return isSupplier()
+            && isSignedIn()
+            && exists(proposalPath(proposalId))
+            && proposalDoc(proposalId).data.quotationId == quotationId
+            && proposalDoc(proposalId).data.supplierId == request.auth.uid
+            && proposalDoc(proposalId).data.status == 'accepted'
+            && (resource == null || resource.data.supplierId == request.auth.uid)
+            && exists(quotationPath(quotationId))
+            && quotationDoc(quotationId).data.status == 'closed'
+            && quotationDoc(quotationId).data.selectedProposalId == proposalId
+            && quotationDoc(quotationId).data.selectedSupplierId == request.auth.uid;
+        }
+
+        function canBuyerReviewInvoice() {
+          return isBuyer()
+            && isQuotationBuyer(quotationId)
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+              'reviewStatus',
+              'reviewNote',
+              'reviewedAt',
+              'reviewedBy'
+            ])
+            && resource.data.reviewStatus == 'pending_review'
+            && request.resource.data.reviewStatus in ['verified', 'rejected']
+            && (
+              request.resource.data.reviewStatus == 'rejected'
+              || resource.data.consistencyStatus != 'fail'
+            )
+            && request.resource.data.reviewedBy == request.auth.uid
+            && request.resource.data.reviewedAt is timestamp;
+        }
+
+        allow read: if isQuotationBuyer(quotationId)
+          || (
+            isSupplier()
+            && isSignedIn()
+            && exists(proposalPath(proposalId))
+            && proposalDoc(proposalId).data.quotationId == quotationId
+            && proposalDoc(proposalId).data.supplierId == request.auth.uid
+          );
+
+        allow create: if canSupplierWriteInvoice()
+          && validInvoiceKeys(request.resource.data)
+          && validInvoiceTypes(request.resource.data)
+          && request.resource.data.quotationId == quotationId
+          && request.resource.data.proposalId == proposalId
+          && request.resource.data.supplierId == request.auth.uid
+          && request.resource.data.supplierName == proposalDoc(proposalId).data.supplier
+          && request.resource.data.reviewStatus == 'pending_review'
+          && request.resource.data.reviewNote == ''
+          && request.resource.data.reviewedAt == null
+          && request.resource.data.reviewedBy == null;
+
+        allow update: if (
+            canSupplierWriteInvoice()
+            && validInvoiceKeys(request.resource.data)
+            && validInvoiceTypes(request.resource.data)
+            && request.resource.data.quotationId == quotationId
+            && request.resource.data.proposalId == proposalId
+            && request.resource.data.supplierId == request.auth.uid
+            && request.resource.data.supplierName == proposalDoc(proposalId).data.supplier
+            && request.resource.data.reviewStatus == 'pending_review'
+            && request.resource.data.reviewNote == ''
+            && request.resource.data.reviewedAt == null
+            && request.resource.data.reviewedBy == null
+          ) || canBuyerReviewInvoice();
+
+        allow delete: if false;
+      }
+    }
+
+    match /proposals/{proposalId} {
+      function validProposalKeys(data) {
+        return data.keys().hasOnly([
+          'quotationId',
+          'supplierId',
+          'supplier',
+          'price',
+          'deliveryDays',
+          'createdAt',
+          'status'
+        ]);
+      }
+
+      function validProposalTypes(data) {
+        return data.quotationId is string
+          && data.supplierId is string
+          && data.supplier is string
+          && data.price is number
+          && data.deliveryDays is number
+          && data.createdAt is timestamp
+          && data.status is string;
+      }
+
+      allow read: if isSignedIn()
+        && (
+          resource.data.supplierId == request.auth.uid
+          || isQuotationBuyer(resource.data.quotationId)
+        );
+
+      allow create: if isSupplier()
+        && isProfileCompleted(request.auth.uid)
+        && validProposalKeys(request.resource.data)
+        && validProposalTypes(request.resource.data)
+        && request.resource.data.supplierId == request.auth.uid
+        && request.resource.data.supplier == userDoc(request.auth.uid).data.companyName
+        && request.resource.data.status == 'sent'
+        && exists(quotationPath(request.resource.data.quotationId))
+        && quotationDoc(request.resource.data.quotationId).data.status == 'open';
+
+      allow update: if isBuyer()
+        && isQuotationBuyer(resource.data.quotationId)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status'
+        ])
+        && resource.data.status == 'sent'
+        && request.resource.data.status in ['accepted', 'rejected']
+        && exists(quotationPath(resource.data.quotationId))
+        && quotationDoc(resource.data.quotationId).data.status == 'open';
+
+      allow delete: if false;
+    }
+
+    match /support_tickets/{ticketId} {
+      allow read: if isSignedIn()
+        && resource.data.userId == request.auth.uid;
+
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly([
+          'userId',
+          'userEmail',
+          'companyName',
+          'category',
+          'message',
+          'status',
+          'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.userEmail is string
+        && request.resource.data.companyName is string
+        && request.resource.data.category in [
+          'Cadastro',
+          'Login',
+          'CNPJ',
+          'Cotacao',
+          'Proposta',
+          'XML fiscal',
+          'Outro'
+        ]
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.status == 'open'
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+
+      allow update: if isSignedIn()
+        && resource.data.userId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'message',
+          'updatedAt'
+        ])
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.updatedAt is timestamp
+        && request.resource.data.userId == resource.data.userId
+        && request.resource.data.userEmail == resource.data.userEmail
+        && request.resource.data.companyName == resource.data.companyName
+        && request.resource.data.category == resource.data.category
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.createdAt == resource.data.createdAt;
+
+      allow delete: if false;
+    }
+
+    match /audit_events/{eventId} {
+      allow read: if false;
+      allow write: if false;
+    }
+  }
+}
