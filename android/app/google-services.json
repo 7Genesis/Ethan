@@ -1,8 +1,8 @@
 {
   "project_info": {
     "project_number": "116870087879",
-    "project_id": "ethan",
-    "storage_bucket": "ethan.firebasestorage.app"
+    "project_id": "cotahub-brasil-genesis",
+    "storage_bucket": "cotahub-brasil-genesis.firebasestorage.app"
   },
   "client": [
     {

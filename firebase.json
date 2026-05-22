@@ -14,14 +14,14 @@
     "platforms": {
       "android": {
         "default": {
-          "projectId": "ethan",
+          "projectId": "cotahub-brasil-genesis",
           "appId": "1:116870087879:android:84ef17373cffed6745aae2",
           "fileOutput": "android/app/google-services.json"
         }
       },
       "ios": {
         "default": {
-          "projectId": "ethan",
+          "projectId": "cotahub-brasil-genesis",
           "appId": "1:116870087879:ios:f2e68f8461031fcd45aae2",
           "uploadDebugSymbols": false,
           "fileOutput": "ios/Runner/GoogleService-Info.plist"
@@ -29,7 +29,7 @@
       },
       "macos": {
         "default": {
-          "projectId": "ethan",
+          "projectId": "cotahub-brasil-genesis",
           "appId": "1:116870087879:ios:f2e68f8461031fcd45aae2",
           "uploadDebugSymbols": false,
           "fileOutput": "macos/Runner/GoogleService-Info.plist"
@@ -37,7 +37,7 @@
       },
       "dart": {
         "lib/firebase_options.dart": {
-          "projectId": "ethan",
+          "projectId": "cotahub-brasil-genesis",
           "configurations": {
             "android": "1:116870087879:android:84ef17373cffed6745aae2",
             "ios": "1:116870087879:ios:f2e68f8461031fcd45aae2",
