@@ -1,14 +1,14 @@
-import 'package:projeto_ethan/features/quotations/pages/create_quotation_page.dart';
-import 'package:projeto_ethan/features/quotations/pages/quotation_details_page.dart';
-import 'package:projeto_ethan/features/profile/pages/company_profile_page.dart';
-import 'package:projeto_ethan/features/support/pages/support_page.dart';
-import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
-import 'package:projeto_ethan/models/app_notification.dart';
-import 'package:projeto_ethan/models/quotation.dart';
-import 'package:projeto_ethan/models/quotation_item.dart';
-import 'package:projeto_ethan/repositories/notification_repository.dart';
-import 'package:projeto_ethan/repositories/quotation_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/features/quotations/pages/create_quotation_page.dart';
+import 'package:ethan/features/quotations/pages/quotation_details_page.dart';
+import 'package:ethan/features/profile/pages/company_profile_page.dart';
+import 'package:ethan/features/support/pages/support_page.dart';
+import 'package:ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:ethan/models/app_notification.dart';
+import 'package:ethan/models/quotation.dart';
+import 'package:ethan/models/quotation_item.dart';
+import 'package:ethan/repositories/notification_repository.dart';
+import 'package:ethan/repositories/quotation_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     final notificationRepository = NotificationRepository();
 
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       floatingActionButton: const AiAssistantFab(),
       body: SafeArea(
         child: StreamBuilder<List<Quotation>>(
@@ -110,14 +110,14 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 38,
                     fontWeight: FontWeight.w900,
                     height: 1.02,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   '${openQuotations.length} abertas • ${closedQuotations.length} concluidas • $totalItems itens',
                   style: const TextStyle(
-                    color: CotahubTheme.textSecondary,
+                    color: EthanTheme.textSecondary,
                     fontSize: 16,
                     height: 1.4,
                   ),
@@ -127,8 +127,8 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(999),
                   child: CupertinoSlidingSegmentedControl<_QuotationFilter>(
                     groupValue: selectedFilter,
-                    backgroundColor: CotahubTheme.surfaceAlt,
-                    thumbColor: CotahubTheme.surfaceSoft,
+                    backgroundColor: EthanTheme.surfaceAlt,
+                    thumbColor: EthanTheme.surfaceSoft,
                     padding: const EdgeInsets.all(4),
                     children: const {
                       _QuotationFilter.all: Padding(
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           'Todas',
                           style: TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           'Abertas',
                           style: TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           'Concluidas',
                           style: TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -249,10 +249,10 @@ class _TopBar extends StatelessWidget {
           height: 42,
           width: 42,
           decoration: BoxDecoration(
-            color: CotahubTheme.textPrimary,
+            color: EthanTheme.textPrimary,
             borderRadius: BorderRadius.circular(14),
           ),
-          child: const Icon(Icons.hub_rounded, color: CotahubTheme.background),
+          child: const Icon(Icons.hub_rounded, color: EthanTheme.background),
         ),
         const SizedBox(width: 12),
         const Expanded(
@@ -261,16 +261,16 @@ class _TopBar extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
         ),
         IconButton(
           onPressed: onCreate,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.add_rounded),
         ),
@@ -278,9 +278,9 @@ class _TopBar extends StatelessWidget {
         IconButton(
           onPressed: onProfile,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.apartment_rounded),
         ),
@@ -288,9 +288,9 @@ class _TopBar extends StatelessWidget {
         IconButton(
           onPressed: onSupport,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.support_agent_rounded),
         ),
@@ -298,9 +298,9 @@ class _TopBar extends StatelessWidget {
         IconButton(
           onPressed: onLogout,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.logout_rounded),
         ),
@@ -331,9 +331,9 @@ class _SummaryBand extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -348,14 +348,14 @@ class _SummaryBand extends StatelessWidget {
                   fontSize: 28,
                   fontWeight: FontWeight.w900,
                   height: 1.05,
-                  color: CotahubTheme.textPrimary,
+                  color: EthanTheme.textPrimary,
                 ),
               ),
               const SizedBox(height: 10),
               const Text(
                 'Itens, status e decisao final organizados com a mesma calma visual de um app nativo.',
                 style: TextStyle(
-                  color: CotahubTheme.textSecondary,
+                  color: EthanTheme.textSecondary,
                   height: 1.45,
                 ),
               ),
@@ -367,17 +367,17 @@ class _SummaryBand extends StatelessWidget {
                   _DataChip(
                     label: 'Abertas',
                     value: '$openCount',
-                    color: CotahubTheme.blue,
+                    color: EthanTheme.blue,
                   ),
                   _DataChip(
                     label: 'Concluidas',
                     value: '$closedCount',
-                    color: CotahubTheme.green,
+                    color: EthanTheme.green,
                   ),
                   _DataChip(
                     label: 'Itens',
                     value: '$totalItems',
-                    color: CotahubTheme.accent,
+                    color: EthanTheme.accent,
                   ),
                 ],
               ),
@@ -434,9 +434,9 @@ class _NotificationPanel extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -455,8 +455,8 @@ class _NotificationPanel extends StatelessWidget {
                         : Icons.notifications_none_outlined,
                     size: 18,
                     color: notification.isUnread
-                        ? CotahubTheme.blue
-                        : CotahubTheme.textSecondary,
+                        ? EthanTheme.blue
+                        : EthanTheme.textSecondary,
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -466,7 +466,7 @@ class _NotificationPanel extends StatelessWidget {
                         Text(
                           notification.title,
                           style: TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             fontWeight: notification.isUnread
                                 ? FontWeight.w800
                                 : FontWeight.w700,
@@ -476,7 +476,7 @@ class _NotificationPanel extends StatelessWidget {
                         Text(
                           notification.body,
                           style: const TextStyle(
-                            color: CotahubTheme.textSecondary,
+                            color: EthanTheme.textSecondary,
                             height: 1.35,
                           ),
                         ),
@@ -504,10 +504,10 @@ class _PreviewTile extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: item.hasImage
-            ? CotahubTheme.surfaceWarm
-            : CotahubTheme.surfaceAlt,
+            ? EthanTheme.surfaceWarm
+            : EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         children: [
@@ -522,20 +522,20 @@ class _PreviewTile extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 16,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   item.quantity,
-                  style: const TextStyle(color: CotahubTheme.textSecondary),
+                  style: const TextStyle(color: EthanTheme.textSecondary),
                 ),
                 if (item.brandModelLabel.isNotEmpty) ...[
                   const SizedBox(height: 4),
                   Text(
                     item.brandModelLabel,
                     style: const TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       fontSize: 13,
                     ),
                   ),
@@ -567,9 +567,9 @@ class _QuotationCard extends StatelessWidget {
         child: Ink(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: CotahubTheme.surface,
+            color: EthanTheme.surface,
             borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: CotahubTheme.line),
+            border: Border.all(color: EthanTheme.line),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -589,7 +589,7 @@ class _QuotationCard extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.w900,
-                              color: CotahubTheme.textPrimary,
+                              color: EthanTheme.textPrimary,
                             ),
                           ),
                         ),
@@ -600,7 +600,7 @@ class _QuotationCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       quotation.summaryQuantity,
-                      style: const TextStyle(color: CotahubTheme.textSecondary),
+                      style: const TextStyle(color: EthanTheme.textSecondary),
                     ),
                     if (firstItem != null &&
                         firstItem.brandModelLabel.isNotEmpty) ...[
@@ -608,7 +608,7 @@ class _QuotationCard extends StatelessWidget {
                       Text(
                         firstItem.brandModelLabel,
                         style: const TextStyle(
-                          color: CotahubTheme.textSecondary,
+                          color: EthanTheme.textSecondary,
                           fontSize: 13,
                         ),
                       ),
@@ -629,7 +629,7 @@ class _QuotationCard extends StatelessWidget {
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        color: CotahubTheme.textSecondary,
+                        color: EthanTheme.textSecondary,
                         height: 1.45,
                       ),
                     ),
@@ -639,7 +639,7 @@ class _QuotationCard extends StatelessWidget {
               const SizedBox(width: 8),
               const Icon(
                 Icons.chevron_right_rounded,
-                color: CotahubTheme.textSecondary,
+                color: EthanTheme.textSecondary,
               ),
             ],
           ),
@@ -680,12 +680,12 @@ class _Thumbnail extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       alignment: Alignment.center,
-      child: const Icon(Icons.inventory_2_rounded, color: CotahubTheme.accent),
+      child: const Icon(Icons.inventory_2_rounded, color: EthanTheme.accent),
     );
   }
 }
@@ -735,14 +735,14 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = quotation.purchaseCompleted
-        ? CotahubTheme.green
+        ? EthanTheme.green
         : quotation.invoiceUnderReview
-        ? CotahubTheme.accent
+        ? EthanTheme.accent
         : quotation.awaitingInvoice
-        ? CotahubTheme.blue
+        ? EthanTheme.blue
         : quotation.isClosed
-        ? CotahubTheme.green
-        : CotahubTheme.blue;
+        ? EthanTheme.green
+        : EthanTheme.blue;
     final label = quotation.isClosed ? quotation.workflowStageLabel : 'Aberta';
 
     return Container(
@@ -772,13 +772,13 @@ class _InlineEmptyPreview extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: const Text(
         'Quando voce publicar a primeira cotacao, os itens aparecem aqui como preview.',
-        style: TextStyle(color: CotahubTheme.textSecondary, height: 1.4),
+        style: TextStyle(color: EthanTheme.textSecondary, height: 1.4),
       ),
     );
   }
@@ -795,9 +795,9 @@ class _EmptyState extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -807,14 +807,14 @@ class _EmptyState extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             message,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               height: 1.45,
             ),
           ),

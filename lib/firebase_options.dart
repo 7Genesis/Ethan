@@ -47,35 +47,35 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyDtv4MH5t-fIEHG06-Ouqvn-iAdzdRAjE0',
     appId: '1:116870087879:android:84ef17373cffed6745aae2',
     messagingSenderId: '116870087879',
-    projectId: 'cotahub-brasil-genesis',
-    storageBucket: 'cotahub-brasil-genesis.firebasestorage.app',
+    projectId: 'ethan',
+    storageBucket: 'ethan.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBTYiabFdMjHr5MJA_omYyvLI3bYTPymuI',
     appId: '1:116870087879:ios:f2e68f8461031fcd45aae2',
     messagingSenderId: '116870087879',
-    projectId: 'cotahub-brasil-genesis',
-    storageBucket: 'cotahub-brasil-genesis.firebasestorage.app',
-    iosBundleId: 'com.example.cotahub',
+    projectId: 'ethan',
+    storageBucket: 'ethan.firebasestorage.app',
+    iosBundleId: 'com.example.ethan',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBTYiabFdMjHr5MJA_omYyvLI3bYTPymuI',
     appId: '1:116870087879:ios:f2e68f8461031fcd45aae2',
     messagingSenderId: '116870087879',
-    projectId: 'cotahub-brasil-genesis',
-    storageBucket: 'cotahub-brasil-genesis.firebasestorage.app',
-    iosBundleId: 'com.example.cotahub',
+    projectId: 'ethan',
+    storageBucket: 'ethan.firebasestorage.app',
+    iosBundleId: 'com.example.ethan',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDUOlMkCSdQpC9cCYiywy4wWB4ER4AuE1I',
     appId: '1:116870087879:web:be056b625f0ae2eb45aae2',
     messagingSenderId: '116870087879',
-    projectId: 'cotahub-brasil-genesis',
-    authDomain: 'cotahub-brasil-genesis.firebaseapp.com',
-    storageBucket: 'cotahub-brasil-genesis.firebasestorage.app',
+    projectId: 'ethan',
+    authDomain: 'ethan.firebaseapp.com',
+    storageBucket: 'ethan.firebasestorage.app',
     measurementId: 'G-JY4X2H5TQN',
   );
 }

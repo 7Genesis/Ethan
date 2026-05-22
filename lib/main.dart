@@ -1,12 +1,12 @@
-import 'package:projeto_ethan/features/auth/pages/complete_profile_page.dart';
-import 'package:projeto_ethan/features/auth/pages/email_verification_page.dart';
-import 'package:projeto_ethan/features/auth/pages/login_page.dart';
-import 'package:projeto_ethan/features/home/pages/home_page.dart';
-import 'package:projeto_ethan/features/supplier/pages/supplier_home_page.dart';
-import 'package:projeto_ethan/firebase_options.dart';
-import 'package:projeto_ethan/models/user_profile.dart';
-import 'package:projeto_ethan/repositories/user_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/features/auth/pages/complete_profile_page.dart';
+import 'package:ethan/features/auth/pages/email_verification_page.dart';
+import 'package:ethan/features/auth/pages/login_page.dart';
+import 'package:ethan/features/home/pages/home_page.dart';
+import 'package:ethan/features/supplier/pages/supplier_home_page.dart';
+import 'package:ethan/firebase_options.dart';
+import 'package:ethan/models/user_profile.dart';
+import 'package:ethan/repositories/user_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -78,7 +78,7 @@ class ProjetoEthanApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Projeto Ethan',
-      theme: CotahubTheme.buildTheme(),
+      theme: EthanTheme.buildTheme(),
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.userChanges(),
         builder: (context, authSnapshot) {

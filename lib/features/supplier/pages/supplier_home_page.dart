@@ -1,15 +1,15 @@
-import 'package:projeto_ethan/models/invoice_xml_record.dart';
-import 'package:projeto_ethan/models/app_notification.dart';
-import 'package:projeto_ethan/models/proposal.dart';
-import 'package:projeto_ethan/models/quotation.dart';
-import 'package:projeto_ethan/features/profile/pages/company_profile_page.dart';
-import 'package:projeto_ethan/features/support/pages/support_page.dart';
-import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
-import 'package:projeto_ethan/repositories/invoice_xml_repository.dart';
-import 'package:projeto_ethan/repositories/notification_repository.dart';
-import 'package:projeto_ethan/repositories/proposal_repository.dart';
-import 'package:projeto_ethan/repositories/quotation_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/models/invoice_xml_record.dart';
+import 'package:ethan/models/app_notification.dart';
+import 'package:ethan/models/proposal.dart';
+import 'package:ethan/models/quotation.dart';
+import 'package:ethan/features/profile/pages/company_profile_page.dart';
+import 'package:ethan/features/support/pages/support_page.dart';
+import 'package:ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:ethan/repositories/invoice_xml_repository.dart';
+import 'package:ethan/repositories/notification_repository.dart';
+import 'package:ethan/repositories/proposal_repository.dart';
+import 'package:ethan/repositories/quotation_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       floatingActionButton: const AiAssistantFab(),
       body: SafeArea(
         child: StreamBuilder<List<Quotation>>(
@@ -104,14 +104,14 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
                         fontSize: 38,
                         fontWeight: FontWeight.w900,
                         height: 1.02,
-                        color: CotahubTheme.textPrimary,
+                        color: EthanTheme.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       '${quotations.length} abertas • ${sentProposals.length} enviadas • ${acceptedProposals.length} aguardando fechamento',
                       style: const TextStyle(
-                        color: CotahubTheme.textSecondary,
+                        color: EthanTheme.textSecondary,
                         fontSize: 16,
                         height: 1.4,
                       ),
@@ -121,8 +121,8 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
                       borderRadius: BorderRadius.circular(999),
                       child: CupertinoSlidingSegmentedControl<_SupplierFilter>(
                         groupValue: selectedFilter,
-                        backgroundColor: CotahubTheme.surfaceAlt,
-                        thumbColor: CotahubTheme.surfaceSoft,
+                        backgroundColor: EthanTheme.surfaceAlt,
+                        thumbColor: EthanTheme.surfaceSoft,
                         padding: const EdgeInsets.all(4),
                         children: const {
                           _SupplierFilter.opportunities: Padding(
@@ -133,7 +133,7 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
                             child: Text(
                               'Disponiveis',
                               style: TextStyle(
-                                color: CotahubTheme.textPrimary,
+                                color: EthanTheme.textPrimary,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -146,7 +146,7 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
                             child: Text(
                               'Enviadas',
                               style: TextStyle(
-                                color: CotahubTheme.textPrimary,
+                                color: EthanTheme.textPrimary,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -171,7 +171,7 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w900,
-                        color: CotahubTheme.textPrimary,
+                        color: EthanTheme.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -254,9 +254,9 @@ class _SupplierNotificationPanel extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,8 +275,8 @@ class _SupplierNotificationPanel extends StatelessWidget {
                         : Icons.notifications_none_outlined,
                     size: 18,
                     color: notification.isUnread
-                        ? CotahubTheme.blue
-                        : CotahubTheme.textSecondary,
+                        ? EthanTheme.blue
+                        : EthanTheme.textSecondary,
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -286,7 +286,7 @@ class _SupplierNotificationPanel extends StatelessWidget {
                         Text(
                           notification.title,
                           style: TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             fontWeight: notification.isUnread
                                 ? FontWeight.w800
                                 : FontWeight.w700,
@@ -296,7 +296,7 @@ class _SupplierNotificationPanel extends StatelessWidget {
                         Text(
                           notification.body,
                           style: const TextStyle(
-                            color: CotahubTheme.textSecondary,
+                            color: EthanTheme.textSecondary,
                             height: 1.35,
                           ),
                         ),
@@ -332,12 +332,12 @@ class _SupplierTopBar extends StatelessWidget {
           height: 42,
           width: 42,
           decoration: BoxDecoration(
-            color: CotahubTheme.textPrimary,
+            color: EthanTheme.textPrimary,
             borderRadius: BorderRadius.circular(14),
           ),
           child: const Icon(
             Icons.storefront_rounded,
-            color: CotahubTheme.background,
+            color: EthanTheme.background,
           ),
         ),
         const SizedBox(width: 12),
@@ -347,16 +347,16 @@ class _SupplierTopBar extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
         ),
         IconButton(
           onPressed: onProfile,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.apartment_rounded),
         ),
@@ -364,9 +364,9 @@ class _SupplierTopBar extends StatelessWidget {
         IconButton(
           onPressed: onSupport,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.support_agent_rounded),
         ),
@@ -374,9 +374,9 @@ class _SupplierTopBar extends StatelessWidget {
         IconButton(
           onPressed: onLogout,
           style: IconButton.styleFrom(
-            backgroundColor: CotahubTheme.surfaceAlt,
-            foregroundColor: CotahubTheme.textPrimary,
-            side: const BorderSide(color: CotahubTheme.line),
+            backgroundColor: EthanTheme.surfaceAlt,
+            foregroundColor: EthanTheme.textPrimary,
+            side: const BorderSide(color: EthanTheme.line),
           ),
           icon: const Icon(Icons.logout_rounded),
         ),
@@ -401,9 +401,9 @@ class _SupplierSummaryBand extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -414,13 +414,13 @@ class _SupplierSummaryBand extends StatelessWidget {
               fontSize: 28,
               fontWeight: FontWeight.w900,
               height: 1.05,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 10),
           const Text(
             'Visual, contexto e especificacao mais bem organizados reduzem ambiguidade na hora de precificar.',
-            style: TextStyle(color: CotahubTheme.textSecondary, height: 1.45),
+            style: TextStyle(color: EthanTheme.textSecondary, height: 1.45),
           ),
           const SizedBox(height: 18),
           Wrap(
@@ -430,17 +430,17 @@ class _SupplierSummaryBand extends StatelessWidget {
               _DataChip(
                 label: 'Abertas',
                 value: '$openCount',
-                color: CotahubTheme.blue,
+                color: EthanTheme.blue,
               ),
               _DataChip(
                 label: 'Enviadas',
                 value: '$sentCount',
-                color: CotahubTheme.green,
+                color: EthanTheme.green,
               ),
               _DataChip(
                 label: 'Fechando compra',
                 value: '$acceptedCount',
-                color: CotahubTheme.accent,
+                color: EthanTheme.accent,
               ),
             ],
           ),
@@ -468,9 +468,9 @@ class _SupplierQuotationCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -488,11 +488,11 @@ class _SupplierQuotationCard extends StatelessWidget {
                     if (alreadyAnswered)
                       const _MiniPill(
                         label: 'Proposta enviada',
-                        color: CotahubTheme.green,
+                        color: EthanTheme.green,
                       ),
                     _MiniPill(
                       label: quotation.itemCountLabel,
-                      color: CotahubTheme.blue,
+                      color: EthanTheme.blue,
                     ),
                   ],
                 ),
@@ -502,20 +502,20 @@ class _SupplierQuotationCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   quotation.summaryQuantity,
-                  style: const TextStyle(color: CotahubTheme.textSecondary),
+                  style: const TextStyle(color: EthanTheme.textSecondary),
                 ),
                 if (item != null && item.brandModelLabel.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   Text(
                     item.brandModelLabel,
                     style: const TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       fontSize: 13,
                     ),
                   ),
@@ -528,7 +528,7 @@ class _SupplierQuotationCard extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    color: CotahubTheme.textSecondary,
+                    color: EthanTheme.textSecondary,
                     height: 1.45,
                   ),
                 ),
@@ -538,14 +538,14 @@ class _SupplierQuotationCard extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     decoration: BoxDecoration(
-                      color: CotahubTheme.surfaceAlt,
+                      color: EthanTheme.surfaceAlt,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: const Center(
                       child: Text(
                         'Voce ja respondeu esta cotacao',
                         style: TextStyle(
-                          color: CotahubTheme.textSecondary,
+                          color: EthanTheme.textSecondary,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -595,9 +595,9 @@ class _SentProposalCard extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: CotahubTheme.surface,
+            color: EthanTheme.surface,
             borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: CotahubTheme.line),
+            border: Border.all(color: EthanTheme.line),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -608,13 +608,13 @@ class _SentProposalCard extends StatelessWidget {
                     height: 54,
                     width: 54,
                     decoration: BoxDecoration(
-                      color: CotahubTheme.surfaceAlt,
+                      color: EthanTheme.surfaceAlt,
                       borderRadius: BorderRadius.circular(18),
-                      border: Border.all(color: CotahubTheme.line),
+                      border: Border.all(color: EthanTheme.line),
                     ),
                     child: const Icon(
                       Icons.verified_rounded,
-                      color: CotahubTheme.green,
+                      color: EthanTheme.green,
                     ),
                   ),
                   const SizedBox(width: 14),
@@ -625,7 +625,7 @@ class _SentProposalCard extends StatelessWidget {
                         Text(
                           proposal.supplier,
                           style: const TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             fontWeight: FontWeight.w900,
                             fontSize: 17,
                           ),
@@ -634,7 +634,7 @@ class _SentProposalCard extends StatelessWidget {
                         Text(
                           '${_formatPrice(proposal.price)} • ${proposal.deliveryDays} ${proposal.deliveryDays == 1 ? 'dia' : 'dias'}',
                           style: const TextStyle(
-                            color: CotahubTheme.textSecondary,
+                            color: EthanTheme.textSecondary,
                           ),
                         ),
                       ],
@@ -649,7 +649,7 @@ class _SentProposalCard extends StatelessWidget {
                 children: [
                   const _MiniPill(
                     label: 'Oferta aceita',
-                    color: CotahubTheme.green,
+                    color: EthanTheme.green,
                   ),
                   if (invoice != null)
                     _MiniPill(
@@ -659,15 +659,15 @@ class _SentProposalCard extends StatelessWidget {
                           ? 'XML rejeitado'
                           : 'XML enviado',
                       color: invoice.isVerified
-                          ? CotahubTheme.green
+                          ? EthanTheme.green
                           : invoice.isRejected
-                          ? CotahubTheme.accent
-                          : CotahubTheme.blue,
+                          ? EthanTheme.accent
+                          : EthanTheme.blue,
                     )
                   else
                     const _MiniPill(
                       label: 'XML pendente',
-                      color: CotahubTheme.blue,
+                      color: EthanTheme.blue,
                     ),
                 ],
               ),
@@ -681,7 +681,7 @@ class _SentProposalCard extends StatelessWidget {
                     ? 'O comprador marcou divergencia no XML. Reenvie uma versao correta.'
                     : 'XML recebido. O comprador ainda precisa revisar CNPJ e valor.',
                 style: const TextStyle(
-                  color: CotahubTheme.textSecondary,
+                  color: EthanTheme.textSecondary,
                   height: 1.45,
                 ),
               ),
@@ -690,7 +690,7 @@ class _SentProposalCard extends StatelessWidget {
                 Text(
                   invoice.fileName,
                   style: const TextStyle(
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -762,9 +762,9 @@ class _BaseSentProposalCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         children: [
@@ -772,13 +772,13 @@ class _BaseSentProposalCard extends StatelessWidget {
             height: 54,
             width: 54,
             decoration: BoxDecoration(
-              color: CotahubTheme.surfaceAlt,
+              color: EthanTheme.surfaceAlt,
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: CotahubTheme.line),
+              border: Border.all(color: EthanTheme.line),
             ),
             child: const Icon(
               Icons.request_quote_rounded,
-              color: CotahubTheme.accent,
+              color: EthanTheme.accent,
             ),
           ),
           const SizedBox(width: 14),
@@ -789,7 +789,7 @@ class _BaseSentProposalCard extends StatelessWidget {
                 Text(
                   proposal.supplier,
                   style: const TextStyle(
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                     fontWeight: FontWeight.w900,
                     fontSize: 17,
                   ),
@@ -797,7 +797,7 @@ class _BaseSentProposalCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   '${_SentProposalCard._formatPrice(proposal.price)} • ${proposal.deliveryDays} ${proposal.deliveryDays == 1 ? 'dia' : 'dias'}',
-                  style: const TextStyle(color: CotahubTheme.textSecondary),
+                  style: const TextStyle(color: EthanTheme.textSecondary),
                 ),
                 const SizedBox(height: 8),
                 _MiniPill(
@@ -807,8 +807,8 @@ class _BaseSentProposalCard extends StatelessWidget {
                       ? 'Recusada'
                       : proposal.status,
                   color: proposal.status == 'rejected'
-                      ? CotahubTheme.textSecondary
-                      : CotahubTheme.blue,
+                      ? EthanTheme.textSecondary
+                      : EthanTheme.blue,
                 ),
               ],
             ),
@@ -896,7 +896,7 @@ class _CreateSupplierProposalSheetState
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: const BoxDecoration(
-          color: CotahubTheme.surface,
+          color: EthanTheme.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
         child: SafeArea(
@@ -910,7 +910,7 @@ class _CreateSupplierProposalSheetState
                   width: 42,
                   height: 5,
                   decoration: BoxDecoration(
-                    color: CotahubTheme.line,
+                    color: EthanTheme.line,
                     borderRadius: BorderRadius.circular(999),
                   ),
                 ),
@@ -919,7 +919,7 @@ class _CreateSupplierProposalSheetState
               const Text(
                 'Enviar proposta',
                 style: TextStyle(
-                  color: CotahubTheme.textPrimary,
+                  color: EthanTheme.textPrimary,
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
                 ),
@@ -928,7 +928,7 @@ class _CreateSupplierProposalSheetState
               Text(
                 widget.quotation.summaryTitle,
                 style: const TextStyle(
-                  color: CotahubTheme.textSecondary,
+                  color: EthanTheme.textSecondary,
                   height: 1.4,
                 ),
               ),
@@ -964,7 +964,7 @@ class _CreateSupplierProposalSheetState
                           width: 22,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: CotahubTheme.background,
+                            color: EthanTheme.background,
                           ),
                         )
                       : const Text('Enviar proposta'),
@@ -1009,12 +1009,12 @@ class _ItemThumb extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       alignment: Alignment.center,
-      child: const Icon(Icons.inventory_2_rounded, color: CotahubTheme.accent),
+      child: const Icon(Icons.inventory_2_rounded, color: EthanTheme.accent),
     );
   }
 }
@@ -1089,9 +1089,9 @@ class _EmptyPanel extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1101,14 +1101,14 @@ class _EmptyPanel extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             message,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               height: 1.45,
             ),
           ),

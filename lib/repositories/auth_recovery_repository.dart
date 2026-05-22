@@ -1,5 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:projeto_ethan/core/validators/br_documents.dart';
+import 'package:ethan/core/validators/br_documents.dart';
 
 class AuthRecoveryRepository {
   final FirebaseFunctions functions = FirebaseFunctions.instance;

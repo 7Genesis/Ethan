@@ -1,4 +1,4 @@
-package com.example.cotahub
+package com.example.ethan
 
 import io.flutter.embedding.android.FlutterActivity
 

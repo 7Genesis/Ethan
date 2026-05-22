@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "116870087879",
-    "project_id": "cotahub-brasil-genesis",
-    "storage_bucket": "cotahub-brasil-genesis.firebasestorage.app"
+    "project_id": "ethan",
+    "storage_bucket": "ethan.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:116870087879:android:84ef17373cffed6745aae2",
         "android_client_info": {
-          "package_name": "com.example.cotahub"
+          "package_name": "com.example.ethan"
         }
       },
       "oauth_client": [],

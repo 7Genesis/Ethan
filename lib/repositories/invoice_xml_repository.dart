@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:xml/xml.dart';
 
-import 'package:projeto_ethan/models/invoice_xml_record.dart';
+import 'package:ethan/models/invoice_xml_record.dart';
 
 class InvoiceXmlRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;

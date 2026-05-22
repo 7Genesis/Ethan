@@ -1,6 +1,6 @@
-import 'package:projeto_ethan/repositories/support_ticket_repository.dart';
-import 'package:projeto_ethan/services/ai_support_service.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/repositories/support_ticket_repository.dart';
+import 'package:ethan/services/ai_support_service.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:flutter/material.dart';
 
 class AiAssistantFab extends StatelessWidget {
@@ -9,7 +9,7 @@ class AiAssistantFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: CotahubTheme.blue,
+      backgroundColor: EthanTheme.blue,
       foregroundColor: Colors.white,
       onPressed: () {
         showModalBottomSheet<void>(
@@ -114,7 +114,7 @@ class _AiSupportSheetState extends State<_AiSupportSheet> {
         child: Container(
           height: 560,
           decoration: const BoxDecoration(
-            color: CotahubTheme.surface,
+            color: EthanTheme.surface,
             borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
           ),
           child: Column(
@@ -124,7 +124,7 @@ class _AiSupportSheetState extends State<_AiSupportSheet> {
                 width: 36,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: CotahubTheme.line,
+                  color: EthanTheme.line,
                   borderRadius: BorderRadius.circular(999),
                 ),
               ),
@@ -134,7 +134,7 @@ class _AiSupportSheetState extends State<_AiSupportSheet> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
-                  color: CotahubTheme.textPrimary,
+                  color: EthanTheme.textPrimary,
                 ),
               ),
               const SizedBox(height: 8),
@@ -148,8 +148,8 @@ class _AiSupportSheetState extends State<_AiSupportSheet> {
                         ? Alignment.centerRight
                         : Alignment.centerLeft;
                     final bg = message.fromUser
-                        ? CotahubTheme.blue.withValues(alpha: 0.2)
-                        : CotahubTheme.surfaceAlt;
+                        ? EthanTheme.blue.withValues(alpha: 0.2)
+                        : EthanTheme.surfaceAlt;
                     return Align(
                       alignment: align,
                       child: Container(
@@ -162,12 +162,12 @@ class _AiSupportSheetState extends State<_AiSupportSheet> {
                         decoration: BoxDecoration(
                           color: bg,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: CotahubTheme.line),
+                          border: Border.all(color: EthanTheme.line),
                         ),
                         child: Text(
                           message.text,
                           style: const TextStyle(
-                            color: CotahubTheme.textPrimary,
+                            color: EthanTheme.textPrimary,
                             height: 1.35,
                           ),
                         ),

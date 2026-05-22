@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CotahubTheme {
+class EthanTheme {
   static const Color background = Color(0xFF090C12);
   static const Color surface = Color(0xFF131821);
   static const Color surfaceAlt = Color(0xFF19202B);

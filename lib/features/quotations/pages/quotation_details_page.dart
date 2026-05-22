@@ -1,12 +1,12 @@
-import 'package:projeto_ethan/models/invoice_xml_record.dart';
-import 'package:projeto_ethan/models/proposal.dart';
-import 'package:projeto_ethan/models/quotation.dart';
-import 'package:projeto_ethan/models/quotation_item.dart';
-import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
-import 'package:projeto_ethan/repositories/invoice_xml_repository.dart';
-import 'package:projeto_ethan/repositories/proposal_repository.dart';
-import 'package:projeto_ethan/repositories/quotation_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/models/invoice_xml_record.dart';
+import 'package:ethan/models/proposal.dart';
+import 'package:ethan/models/quotation.dart';
+import 'package:ethan/models/quotation_item.dart';
+import 'package:ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:ethan/repositories/invoice_xml_repository.dart';
+import 'package:ethan/repositories/proposal_repository.dart';
+import 'package:ethan/repositories/quotation_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:flutter/material.dart';
 
 class QuotationDetailsPage extends StatelessWidget {
@@ -90,7 +90,7 @@ class QuotationDetailsPage extends StatelessWidget {
         : (quotation.firstItem?.name ?? quotation.product);
 
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       floatingActionButton: const AiAssistantFab(),
       appBar: AppBar(title: const Text('Ofertas recebidas')),
       body: ListView(
@@ -288,13 +288,13 @@ class _HeaderBand extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            CotahubTheme.surface,
-            CotahubTheme.surfaceAlt,
-            CotahubTheme.surfaceSoft,
+            EthanTheme.surface,
+            EthanTheme.surfaceAlt,
+            EthanTheme.surfaceSoft,
           ],
         ),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,23 +306,23 @@ class _HeaderBand extends StatelessWidget {
               _HeaderPill(
                 label: quotation.isClosed ? 'Concluida' : 'Aberta',
                 color: quotation.isClosed
-                    ? CotahubTheme.green
-                    : CotahubTheme.blue,
+                    ? EthanTheme.green
+                    : EthanTheme.blue,
               ),
               _HeaderPill(
                 label: quotation.itemCountLabel,
-                color: CotahubTheme.accent,
+                color: EthanTheme.accent,
               ),
               if (quotation.workflowStage.isNotEmpty)
                 _HeaderPill(
                   label: quotation.workflowStageLabel,
                   color: quotation.purchaseCompleted
-                      ? CotahubTheme.green
+                      ? EthanTheme.green
                       : quotation.invoiceUnderReview
-                      ? CotahubTheme.accent
+                      ? EthanTheme.accent
                       : quotation.awaitingInvoice
-                      ? CotahubTheme.blue
-                      : CotahubTheme.primary,
+                      ? EthanTheme.blue
+                      : EthanTheme.primary,
                 ),
             ],
           ),
@@ -333,7 +333,7 @@ class _HeaderBand extends StatelessWidget {
               fontSize: 32,
               fontWeight: FontWeight.w900,
               height: 1.03,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 10),
@@ -342,7 +342,7 @@ class _HeaderBand extends StatelessWidget {
                 ? quotation.notes
                 : 'Pedido montado com contexto por item para facilitar uma resposta melhor.',
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               fontSize: 16,
               height: 1.5,
             ),
@@ -378,9 +378,9 @@ class _MiniItemTile extends StatelessWidget {
       width: 230,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         children: [
@@ -397,7 +397,7 @@ class _MiniItemTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -406,7 +406,7 @@ class _MiniItemTile extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    color: CotahubTheme.textSecondary,
+                    color: EthanTheme.textSecondary,
                     fontSize: 13,
                   ),
                 ),
@@ -429,9 +429,9 @@ class _QuotationItemCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -447,13 +447,13 @@ class _QuotationItemCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   item.quantity,
-                  style: const TextStyle(color: CotahubTheme.textSecondary),
+                  style: const TextStyle(color: EthanTheme.textSecondary),
                 ),
                 if (item.brandModelLabel.isNotEmpty) ...[
                   const SizedBox(height: 10),
@@ -467,7 +467,7 @@ class _QuotationItemCard extends StatelessWidget {
                   Text(
                     item.notes,
                     style: const TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       height: 1.45,
                     ),
                   ),
@@ -512,12 +512,12 @@ class _ItemThumbnail extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       alignment: Alignment.center,
-      child: const Icon(Icons.inventory_2_rounded, color: CotahubTheme.accent),
+      child: const Icon(Icons.inventory_2_rounded, color: EthanTheme.accent),
     );
   }
 }
@@ -538,9 +538,9 @@ class _OfferSummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Wrap(
         spacing: 10,
@@ -549,27 +549,27 @@ class _OfferSummary extends StatelessWidget {
           _HeaderPill(
             label:
                 '${proposals.length} ${proposals.length == 1 ? 'oferta' : 'ofertas'}',
-            color: CotahubTheme.blue,
+            color: EthanTheme.blue,
           ),
           _HeaderPill(
             label:
                 'Menor preco ${QuotationDetailsPage.formatPrice(lowestPrice)}',
-            color: CotahubTheme.accent,
+            color: EthanTheme.accent,
           ),
           _HeaderPill(
             label:
                 'Entrega mais rapida em $fastestDelivery ${fastestDelivery == 1 ? 'dia' : 'dias'}',
-            color: CotahubTheme.green,
+            color: EthanTheme.green,
           ),
           _HeaderPill(
             label: quotation.workflowStageLabel,
             color: quotation.purchaseCompleted
-                ? CotahubTheme.green
+                ? EthanTheme.green
                 : quotation.invoiceUnderReview
-                ? CotahubTheme.accent
+                ? EthanTheme.accent
                 : quotation.awaitingInvoice
-                ? CotahubTheme.blue
-                : CotahubTheme.primary,
+                ? EthanTheme.blue
+                : EthanTheme.primary,
           ),
         ],
       ),
@@ -598,19 +598,19 @@ class _OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isRejected = proposal.status == 'rejected';
     final color = isSelected
-        ? CotahubTheme.green
+        ? EthanTheme.green
         : isRejected
-        ? CotahubTheme.textSecondary
+        ? EthanTheme.textSecondary
         : isBest
-        ? CotahubTheme.accent
-        : CotahubTheme.blue;
+        ? EthanTheme.accent
+        : EthanTheme.blue;
 
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -620,16 +620,16 @@ class _OfferCard extends StatelessWidget {
             runSpacing: 10,
             children: [
               if (isSelected)
-                const _HeaderPill(label: 'Escolhida', color: CotahubTheme.green)
+                const _HeaderPill(label: 'Escolhida', color: EthanTheme.green)
               else if (isRejected)
                 const _HeaderPill(
                   label: 'Recusada',
-                  color: CotahubTheme.textSecondary,
+                  color: EthanTheme.textSecondary,
                 )
               else if (isBest)
                 const _HeaderPill(
                   label: 'Menor preco',
-                  color: CotahubTheme.accent,
+                  color: EthanTheme.accent,
                 ),
               _HeaderPill(label: highlight, color: color),
             ],
@@ -647,7 +647,7 @@ class _OfferCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
-                        color: CotahubTheme.textPrimary,
+                        color: EthanTheme.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -656,7 +656,7 @@ class _OfferCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w900,
-                        color: CotahubTheme.textPrimary,
+                        color: EthanTheme.textPrimary,
                       ),
                     ),
                   ],
@@ -684,12 +684,12 @@ class _OfferCard extends StatelessWidget {
               const Icon(
                 Icons.local_shipping_outlined,
                 size: 18,
-                color: CotahubTheme.textSecondary,
+                color: EthanTheme.textSecondary,
               ),
               const SizedBox(width: 8),
               Text(
                 'Entrega em ${proposal.deliveryDays} ${proposal.deliveryDays == 1 ? 'dia' : 'dias'}',
-                style: const TextStyle(color: CotahubTheme.textSecondary),
+                style: const TextStyle(color: EthanTheme.textSecondary),
               ),
             ],
           ),
@@ -726,9 +726,9 @@ class _InvoiceXmlCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -744,10 +744,10 @@ class _InvoiceXmlCard extends StatelessWidget {
                     ? 'XML rejeitado'
                     : 'Aguardando revisao',
                 color: invoice.isVerified
-                    ? CotahubTheme.green
+                    ? EthanTheme.green
                     : invoice.isRejected
-                    ? CotahubTheme.accent
-                    : CotahubTheme.blue,
+                    ? EthanTheme.accent
+                    : EthanTheme.blue,
               ),
               _HeaderPill(
                 label: invoice.recipientMatchesBuyer
@@ -756,10 +756,10 @@ class _InvoiceXmlCard extends StatelessWidget {
                     ? 'CNPJ divergente'
                     : 'CNPJ sem base',
                 color: invoice.recipientMatchesBuyer
-                    ? CotahubTheme.green
+                    ? EthanTheme.green
                     : invoice.recipientMismatch
-                    ? CotahubTheme.accent
-                    : CotahubTheme.textSecondary,
+                    ? EthanTheme.accent
+                    : EthanTheme.textSecondary,
               ),
               _HeaderPill(
                 label: invoice.consistencyPass
@@ -770,12 +770,12 @@ class _InvoiceXmlCard extends StatelessWidget {
                     ? 'Consistência com alerta'
                     : 'Consistência não avaliada',
                 color: invoice.consistencyPass
-                    ? CotahubTheme.green
+                    ? EthanTheme.green
                     : invoice.consistencyFail
-                    ? CotahubTheme.accent
+                    ? EthanTheme.accent
                     : invoice.consistencyWarning
-                    ? CotahubTheme.blue
-                    : CotahubTheme.textSecondary,
+                    ? EthanTheme.blue
+                    : EthanTheme.textSecondary,
               ),
             ],
           ),
@@ -785,14 +785,14 @@ class _InvoiceXmlCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             invoice.fileName,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -831,13 +831,13 @@ class _InvoiceXmlCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: CotahubTheme.surfaceAlt,
+                color: EthanTheme.surfaceAlt,
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Text(
                 'Chave de acesso: ${invoice.invoiceKey}',
                 style: const TextStyle(
-                  color: CotahubTheme.textPrimary,
+                  color: EthanTheme.textPrimary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -848,7 +848,7 @@ class _InvoiceXmlCard extends StatelessWidget {
             Text(
               invoice.reviewNote,
               style: const TextStyle(
-                color: CotahubTheme.textSecondary,
+                color: EthanTheme.textSecondary,
                 height: 1.45,
               ),
             ),
@@ -859,9 +859,9 @@ class _InvoiceXmlCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: CotahubTheme.surfaceAlt,
+                color: EthanTheme.surfaceAlt,
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: CotahubTheme.line),
+                border: Border.all(color: EthanTheme.line),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -872,7 +872,7 @@ class _InvoiceXmlCard extends StatelessWidget {
                         child: Text(
                           '• $issue',
                           style: const TextStyle(
-                            color: CotahubTheme.textSecondary,
+                            color: EthanTheme.textSecondary,
                             height: 1.35,
                             fontWeight: FontWeight.w600,
                           ),
@@ -934,7 +934,7 @@ class _InvoiceFact extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -942,7 +942,7 @@ class _InvoiceFact extends StatelessWidget {
           Text(
             value,
             style: const TextStyle(
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
               fontWeight: FontWeight.w800,
               height: 1.4,
             ),
@@ -986,18 +986,18 @@ class _InlineTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: CotahubTheme.textSecondary),
+          Icon(icon, size: 14, color: EthanTheme.textSecondary),
           const SizedBox(width: 6),
           Text(
             label,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -1023,14 +1023,14 @@ class _SectionHeader extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w900,
-            color: CotahubTheme.textPrimary,
+            color: EthanTheme.textPrimary,
           ),
         ),
         const SizedBox(height: 6),
         Text(
           subtitle,
           style: const TextStyle(
-            color: CotahubTheme.textSecondary,
+            color: EthanTheme.textSecondary,
             height: 1.4,
           ),
         ),
@@ -1050,9 +1050,9 @@ class _EmptyProposalState extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1062,14 +1062,14 @@ class _EmptyProposalState extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             message,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               height: 1.45,
             ),
           ),

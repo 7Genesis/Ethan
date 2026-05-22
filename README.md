@@ -108,4 +108,4 @@ flutter run -d chrome
 
 ## Repository
 
-Official source: [7Genesis/Cotahub](https://github.com/7Genesis/Cotahub)
+Official source: [7Genesis/Ethan](https://github.com/7Genesis/Ethan)

@@ -1,5 +1,5 @@
-import 'package:projeto_ethan/repositories/user_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/repositories/user_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
@@ -171,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
     final isWide = MediaQuery.of(context).size.width >= 940;
 
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(24, 18, 24, 28),
@@ -250,11 +250,11 @@ class _BrandBar extends StatelessWidget {
           height: 46,
           width: 46,
           decoration: BoxDecoration(
-            color: CotahubTheme.surfaceSoft,
+            color: EthanTheme.surfaceSoft,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: CotahubTheme.line),
+            border: Border.all(color: EthanTheme.line),
           ),
-          child: const Icon(Icons.hub_rounded, color: CotahubTheme.blue),
+          child: const Icon(Icons.hub_rounded, color: EthanTheme.blue),
         ),
         const SizedBox(width: 12),
         const Column(
@@ -265,13 +265,13 @@ class _BrandBar extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w900,
-                color: CotahubTheme.textPrimary,
+                color: EthanTheme.textPrimary,
               ),
             ),
             Text(
               'Compra, proposta e validacao fiscal no mesmo fluxo.',
               style: TextStyle(
-                color: CotahubTheme.textSecondary,
+                color: EthanTheme.textSecondary,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -294,13 +294,13 @@ class _VisualPane extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            CotahubTheme.surface,
-            CotahubTheme.surfaceAlt,
-            CotahubTheme.surfaceSoft,
+            EthanTheme.surface,
+            EthanTheme.surfaceAlt,
+            EthanTheme.surfaceSoft,
           ],
         ),
         borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,7 +311,7 @@ class _VisualPane extends StatelessWidget {
               fontSize: 44,
               fontWeight: FontWeight.w900,
               height: 1.02,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 12),
@@ -320,7 +320,7 @@ class _VisualPane extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               height: 1.55,
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
             ),
           ),
           const SizedBox(height: 24),
@@ -346,9 +346,9 @@ class _VisualPane extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
-              color: CotahubTheme.overlay,
+              color: EthanTheme.overlay,
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: CotahubTheme.line),
+              border: Border.all(color: EthanTheme.line),
             ),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -398,9 +398,9 @@ class _AuthPane extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -410,13 +410,13 @@ class _AuthPane extends StatelessWidget {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 8),
           const Text(
             'Se ainda não tem conta, clique em cadastrar para abrir a tela de cadastro (comprador/fornecedor).',
-            style: TextStyle(color: CotahubTheme.textSecondary, height: 1.45),
+            style: TextStyle(color: EthanTheme.textSecondary, height: 1.45),
           ),
           const SizedBox(height: 22),
           TextField(
@@ -473,18 +473,18 @@ class _AuthPane extends StatelessWidget {
           const SizedBox(height: 18),
           Row(
             children: [
-              const Expanded(child: Divider(color: CotahubTheme.line)),
+              const Expanded(child: Divider(color: EthanTheme.line)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
                   'ou',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: CotahubTheme.textSecondary,
+                    color: EthanTheme.textSecondary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
-              const Expanded(child: Divider(color: CotahubTheme.line)),
+              const Expanded(child: Divider(color: EthanTheme.line)),
             ],
           ),
           const SizedBox(height: 18),
@@ -611,7 +611,7 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
 
     await showModalBottomSheet<void>(
       context: context,
-      backgroundColor: CotahubTheme.surface,
+      backgroundColor: EthanTheme.surface,
       builder: (sheetContext) {
         return SafeArea(
           child: Padding(
@@ -625,13 +625,13 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   'Você pode entrar com este e-mail ou redefinir sua senha.',
-                  style: TextStyle(color: CotahubTheme.textSecondary),
+                  style: TextStyle(color: EthanTheme.textSecondary),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
@@ -671,7 +671,7 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(title: const Text('Cadastrar conta')),
       body: Center(
         child: ConstrainedBox(
@@ -681,9 +681,9 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: CotahubTheme.surface,
+                color: EthanTheme.surface,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: CotahubTheme.line),
+                border: Border.all(color: EthanTheme.line),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -694,14 +694,14 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
-                      color: CotahubTheme.textPrimary,
+                      color: EthanTheme.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     'Selecione aqui se a conta será comprador ou fornecedor.',
                     style: TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       height: 1.45,
                     ),
                   ),
@@ -710,8 +710,8 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
                     borderRadius: BorderRadius.circular(999),
                     child: CupertinoSlidingSegmentedControl<_RegisterRole>(
                       groupValue: _selectedRole,
-                      backgroundColor: CotahubTheme.surfaceAlt,
-                      thumbColor: CotahubTheme.surfaceSoft,
+                      backgroundColor: EthanTheme.surfaceAlt,
+                      thumbColor: EthanTheme.surfaceSoft,
                       padding: const EdgeInsets.all(4),
                       children: const {
                         _RegisterRole.buyer: Padding(
@@ -722,7 +722,7 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
                           child: Text(
                             'Comprador',
                             style: TextStyle(
-                              color: CotahubTheme.textPrimary,
+                              color: EthanTheme.textPrimary,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -735,7 +735,7 @@ class _RegisterAccountPageState extends State<_RegisterAccountPage> {
                           child: Text(
                             'Fornecedor',
                             style: TextStyle(
-                              color: CotahubTheme.textPrimary,
+                              color: EthanTheme.textPrimary,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -832,19 +832,19 @@ class _SignalChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: CotahubTheme.overlay,
+        color: EthanTheme.overlay,
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: CotahubTheme.blue),
+          Icon(icon, size: 18, color: EthanTheme.blue),
           const SizedBox(width: 8),
           Text(
             label,
             style: const TextStyle(
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -869,7 +869,7 @@ class _MetricRow extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -878,7 +878,7 @@ class _MetricRow extends StatelessWidget {
           child: Text(
             value,
             style: const TextStyle(
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -962,7 +962,7 @@ class _ForgotPasswordPageState extends State<_ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(title: const Text('Recuperar senha')),
       body: Center(
         child: ConstrainedBox(
@@ -972,9 +972,9 @@ class _ForgotPasswordPageState extends State<_ForgotPasswordPage> {
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: CotahubTheme.surface,
+                color: EthanTheme.surface,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: CotahubTheme.line),
+                border: Border.all(color: EthanTheme.line),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -985,14 +985,14 @@ class _ForgotPasswordPageState extends State<_ForgotPasswordPage> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
-                      color: CotahubTheme.textPrimary,
+                      color: EthanTheme.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     'Enviamos um e-mail com link/código de confirmação para redefinir sua senha.',
                     style: TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       height: 1.45,
                     ),
                   ),
@@ -1027,7 +1027,7 @@ class _ForgotPasswordPageState extends State<_ForgotPasswordPage> {
                   const Text(
                     'Recuperação por celular/WhatsApp ficará para próxima etapa com Phone Auth.',
                     style: TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       height: 1.45,
                     ),
                   ),
@@ -1180,11 +1180,11 @@ class _ResetPasswordWithCodePageState
 
   Color _passwordStrengthColor(double score) {
     if (score >= 0.8) {
-      return CotahubTheme.green;
+      return EthanTheme.green;
     }
 
     if (score >= 0.5) {
-      return CotahubTheme.accent;
+      return EthanTheme.accent;
     }
 
     return const Color(0xFFFF6B6B);
@@ -1203,7 +1203,7 @@ class _ResetPasswordWithCodePageState
     final strengthColor = _passwordStrengthColor(strengthScore);
 
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(title: const Text('Redefinir senha')),
       body: Center(
         child: ConstrainedBox(
@@ -1213,9 +1213,9 @@ class _ResetPasswordWithCodePageState
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: CotahubTheme.surface,
+                color: EthanTheme.surface,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: CotahubTheme.line),
+                border: Border.all(color: EthanTheme.line),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -1226,14 +1226,14 @@ class _ResetPasswordWithCodePageState
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
-                      color: CotahubTheme.textPrimary,
+                      color: EthanTheme.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Conta: ${widget.email}',
                     style: const TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       height: 1.45,
                     ),
                   ),
@@ -1282,7 +1282,7 @@ class _ResetPasswordWithCodePageState
                             value: strengthScore == 0 ? 0.02 : strengthScore,
                             minHeight: 8,
                             color: strengthColor,
-                            backgroundColor: CotahubTheme.surfaceAlt,
+                            backgroundColor: EthanTheme.surfaceAlt,
                           ),
                         ),
                       ),

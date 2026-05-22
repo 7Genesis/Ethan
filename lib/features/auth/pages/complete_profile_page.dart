@@ -1,9 +1,9 @@
-import 'package:projeto_ethan/features/home/pages/home_page.dart';
-import 'package:projeto_ethan/features/supplier/pages/supplier_home_page.dart';
-import 'package:projeto_ethan/models/user_profile.dart';
-import 'package:projeto_ethan/core/validators/br_documents.dart';
-import 'package:projeto_ethan/repositories/user_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/features/home/pages/home_page.dart';
+import 'package:ethan/features/supplier/pages/supplier_home_page.dart';
+import 'package:ethan/models/user_profile.dart';
+import 'package:ethan/core/validators/br_documents.dart';
+import 'package:ethan/repositories/user_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
@@ -253,7 +253,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
         profile.hasRequiredIdentity;
 
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(
         title: const Text('Cadastro completo'),
         actions: [
@@ -283,9 +283,9 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                     Container(
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
-                        color: CotahubTheme.surface,
+                        color: EthanTheme.surface,
                         borderRadius: BorderRadius.circular(28),
-                        border: Border.all(color: CotahubTheme.line),
+                        border: Border.all(color: EthanTheme.line),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,7 +295,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                             style: TextStyle(
                               fontSize: 34,
                               fontWeight: FontWeight.w900,
-                              color: CotahubTheme.textPrimary,
+                              color: EthanTheme.textPrimary,
                               height: 1.02,
                             ),
                           ),
@@ -303,7 +303,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                           const Text(
                             'O app so libera cotacao, proposta e fechamento fiscal depois de empresa e responsavel ficarem completos. Isso reduz cadastro vazio e protege o fluxo.',
                             style: TextStyle(
-                              color: CotahubTheme.textSecondary,
+                              color: EthanTheme.textSecondary,
                               fontSize: 15,
                               height: 1.55,
                             ),
@@ -332,22 +332,22 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                             Container(
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
-                                color: CotahubTheme.surfaceAlt,
+                                color: EthanTheme.surfaceAlt,
                                 borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: CotahubTheme.line),
+                                border: Border.all(color: EthanTheme.line),
                               ),
                               child: Row(
                                 children: [
                                   const Icon(
                                     Icons.warning_amber_rounded,
-                                    color: CotahubTheme.blue,
+                                    color: EthanTheme.blue,
                                   ),
                                   const SizedBox(width: 10),
                                   const Expanded(
                                     child: Text(
                                       'Conta legada detectada: os dados existem, mas a ativação final não foi marcada. Reprocesse para concluir sem perder dados.',
                                       style: TextStyle(
-                                        color: CotahubTheme.textSecondary,
+                                        color: EthanTheme.textSecondary,
                                         height: 1.4,
                                       ),
                                     ),
@@ -376,8 +376,8 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                       borderRadius: BorderRadius.circular(999),
                       child: CupertinoSlidingSegmentedControl<_ProfileRole>(
                         groupValue: _selectedRole,
-                        backgroundColor: CotahubTheme.surfaceAlt,
-                        thumbColor: CotahubTheme.surfaceSoft,
+                        backgroundColor: EthanTheme.surfaceAlt,
+                        thumbColor: EthanTheme.surfaceSoft,
                         padding: const EdgeInsets.all(4),
                         children: const {
                           _ProfileRole.buyer: Padding(
@@ -388,7 +388,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                             child: Text(
                               'Comprador',
                               style: TextStyle(
-                                color: CotahubTheme.textPrimary,
+                                color: EthanTheme.textPrimary,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
@@ -401,7 +401,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                             child: Text(
                               'Fornecedor',
                               style: TextStyle(
-                                color: CotahubTheme.textPrimary,
+                                color: EthanTheme.textPrimary,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
@@ -425,8 +425,8 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                           borderRadius: BorderRadius.circular(999),
                           child: CupertinoSlidingSegmentedControl<_EntityType>(
                             groupValue: _selectedEntityType,
-                            backgroundColor: CotahubTheme.surfaceAlt,
-                            thumbColor: CotahubTheme.surfaceSoft,
+                            backgroundColor: EthanTheme.surfaceAlt,
+                            thumbColor: EthanTheme.surfaceSoft,
                             padding: const EdgeInsets.all(4),
                             children: const {
                               _EntityType.legal: Padding(
@@ -437,7 +437,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                 child: Text(
                                   'Pessoa Jurídica (PJ)',
                                   style: TextStyle(
-                                    color: CotahubTheme.textPrimary,
+                                    color: EthanTheme.textPrimary,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -450,7 +450,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                 child: Text(
                                   'Pessoa Física (PF)',
                                   style: TextStyle(
-                                    color: CotahubTheme.textPrimary,
+                                    color: EthanTheme.textPrimary,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -478,8 +478,8 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                   _CompanyDocumentType
                                 >(
                                   groupValue: _selectedCompanyDocumentType,
-                                  backgroundColor: CotahubTheme.surfaceAlt,
-                                  thumbColor: CotahubTheme.surfaceSoft,
+                                  backgroundColor: EthanTheme.surfaceAlt,
+                                  thumbColor: EthanTheme.surfaceSoft,
                                   padding: const EdgeInsets.all(4),
                                   children: const {
                                     _CompanyDocumentType.cnpj: Padding(
@@ -490,7 +490,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                       child: Text(
                                         'CNPJ',
                                         style: TextStyle(
-                                          color: CotahubTheme.textPrimary,
+                                          color: EthanTheme.textPrimary,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -503,7 +503,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                       child: Text(
                                         'CPF provisório',
                                         style: TextStyle(
-                                          color: CotahubTheme.textPrimary,
+                                          color: EthanTheme.textPrimary,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -726,9 +726,9 @@ class _CompanySection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -738,7 +738,7 @@ class _CompanySection extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 6),
@@ -747,7 +747,7 @@ class _CompanySection extends StatelessWidget {
                 ? 'Cadastro PF habilitado. Use CPF como documento principal.'
                 : 'Cadastro PJ com CNPJ. Se ainda nao tiver CNPJ, pode usar CPF provisoriamente.',
             style: const TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               height: 1.45,
             ),
           ),
@@ -829,9 +829,9 @@ class _BuyerSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -841,13 +841,13 @@ class _BuyerSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 6),
           const Text(
             'Quem compra ou vende precisa ficar vinculado a um responsavel real dentro da empresa.',
-            style: TextStyle(color: CotahubTheme.textSecondary, height: 1.45),
+            style: TextStyle(color: EthanTheme.textSecondary, height: 1.45),
           ),
           const SizedBox(height: 18),
           TextFormField(
@@ -899,20 +899,20 @@ class _InfoPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: CotahubTheme.surfaceAlt,
+        color: EthanTheme.surfaceAlt,
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: CotahubTheme.blue),
+          Icon(icon, size: 18, color: EthanTheme.blue),
           const SizedBox(width: 8),
           Flexible(
             child: Text(
               label,
               style: const TextStyle(
-                color: CotahubTheme.textPrimary,
+                color: EthanTheme.textPrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),

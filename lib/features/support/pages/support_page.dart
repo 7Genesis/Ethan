@@ -1,6 +1,6 @@
-import 'package:projeto_ethan/models/support_ticket.dart';
-import 'package:projeto_ethan/repositories/support_ticket_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/models/support_ticket.dart';
+import 'package:ethan/repositories/support_ticket_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:flutter/material.dart';
 
 class SupportPage extends StatefulWidget {
@@ -65,7 +65,7 @@ class _SupportPageState extends State<SupportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(title: const Text('Suporte')),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
@@ -79,7 +79,7 @@ class _SupportPageState extends State<SupportPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -116,7 +116,7 @@ class _SupportPageState extends State<SupportPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -182,7 +182,7 @@ class _SupportPageState extends State<SupportPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -193,7 +193,7 @@ class _SupportPageState extends State<SupportPage> {
                     if (tickets.isEmpty) {
                       return const Text(
                         'Nenhum chamado aberto por enquanto.',
-                        style: TextStyle(color: CotahubTheme.textSecondary),
+                        style: TextStyle(color: EthanTheme.textSecondary),
                       );
                     }
 
@@ -204,9 +204,9 @@ class _SupportPageState extends State<SupportPage> {
                               margin: const EdgeInsets.only(bottom: 10),
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: CotahubTheme.surfaceAlt,
+                                color: EthanTheme.surfaceAlt,
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: CotahubTheme.line),
+                                border: Border.all(color: EthanTheme.line),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,7 +214,7 @@ class _SupportPageState extends State<SupportPage> {
                                   Text(
                                     ticket.category,
                                     style: const TextStyle(
-                                      color: CotahubTheme.textPrimary,
+                                      color: EthanTheme.textPrimary,
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
@@ -222,14 +222,14 @@ class _SupportPageState extends State<SupportPage> {
                                   Text(
                                     ticket.message,
                                     style: const TextStyle(
-                                      color: CotahubTheme.textSecondary,
+                                      color: EthanTheme.textSecondary,
                                     ),
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
                                     'Status: ${ticket.status}',
                                     style: const TextStyle(
-                                      color: CotahubTheme.textSecondary,
+                                      color: EthanTheme.textSecondary,
                                       fontSize: 12,
                                     ),
                                   ),
@@ -260,9 +260,9 @@ class _SectionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: child,
     );
@@ -285,14 +285,14 @@ class _FaqItem extends StatelessWidget {
           Text(
             question,
             style: const TextStyle(
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
               fontWeight: FontWeight.w800,
             ),
           ),
           const SizedBox(height: 2),
           Text(
             answer,
-            style: const TextStyle(color: CotahubTheme.textSecondary),
+            style: const TextStyle(color: EthanTheme.textSecondary),
           ),
         ],
       ),

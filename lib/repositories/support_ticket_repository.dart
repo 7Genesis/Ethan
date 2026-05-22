@@ -3,8 +3,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:projeto_ethan/models/support_ticket.dart';
-import 'package:projeto_ethan/repositories/user_repository.dart';
+import 'package:ethan/models/support_ticket.dart';
+import 'package:ethan/repositories/user_repository.dart';
 
 class SupportTicketRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;

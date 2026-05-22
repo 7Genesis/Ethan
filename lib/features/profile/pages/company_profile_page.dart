@@ -1,7 +1,7 @@
-import 'package:projeto_ethan/features/support/pages/support_page.dart';
-import 'package:projeto_ethan/models/user_profile.dart';
-import 'package:projeto_ethan/repositories/user_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/features/support/pages/support_page.dart';
+import 'package:ethan/models/user_profile.dart';
+import 'package:ethan/repositories/user_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:flutter/material.dart';
 
 class CompanyProfilePage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(title: const Text('Perfil da empresa')),
       body: FutureBuilder<UserProfile?>(
         future: _userRepository.getCurrentUserProfile(forceServer: true),
@@ -88,7 +88,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
             return const Center(
               child: Text(
                 'Perfil não encontrado.',
-                style: TextStyle(color: CotahubTheme.textSecondary),
+                style: TextStyle(color: EthanTheme.textSecondary),
               ),
             );
           }
@@ -111,9 +111,9 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: CotahubTheme.surface,
+                  color: EthanTheme.surface,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: CotahubTheme.line),
+                  border: Border.all(color: EthanTheme.line),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
-                        color: CotahubTheme.textPrimary,
+                        color: EthanTheme.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -166,7 +166,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                       child: Text(
                         profile.companyTaxId,
                         style: const TextStyle(
-                          color: CotahubTheme.textSecondary,
+                          color: EthanTheme.textSecondary,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -174,7 +174,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                     const SizedBox(height: 8),
                     const Text(
                       'Para alterar o CNPJ, entre em contato com o suporte.',
-                      style: TextStyle(color: CotahubTheme.textSecondary),
+                      style: TextStyle(color: EthanTheme.textSecondary),
                     ),
                     const SizedBox(height: 8),
                     OutlinedButton.icon(
@@ -196,9 +196,9 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: CotahubTheme.surface,
+                  color: EthanTheme.surface,
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: CotahubTheme.line),
+                  border: Border.all(color: EthanTheme.line),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,7 +208,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
-                        color: CotahubTheme.textPrimary,
+                        color: EthanTheme.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 12),

@@ -1,8 +1,8 @@
-import 'package:projeto_ethan/models/quotation.dart';
-import 'package:projeto_ethan/models/quotation_item.dart';
-import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
-import 'package:projeto_ethan/repositories/quotation_repository.dart';
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/models/quotation.dart';
+import 'package:ethan/models/quotation_item.dart';
+import 'package:ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:ethan/repositories/quotation_repository.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:flutter/material.dart';
 
 class CreateQuotationPage extends StatefulWidget {
@@ -124,7 +124,7 @@ class _CreateQuotationPageState extends State<CreateQuotationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       floatingActionButton: const AiAssistantFab(),
       appBar: AppBar(title: const Text('Nova cotacao')),
       bottomNavigationBar: SafeArea(
@@ -160,9 +160,9 @@ class _CreateQuotationPageState extends State<CreateQuotationPage> {
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: CotahubTheme.surface,
+              color: EthanTheme.surface,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: CotahubTheme.line),
+              border: Border.all(color: EthanTheme.line),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,14 +172,14 @@ class _CreateQuotationPageState extends State<CreateQuotationPage> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w900,
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   'Use este campo para informacoes do lote inteiro: entrega, janela de recebimento ou regras comuns a todos os itens.',
                   style: TextStyle(
-                    color: CotahubTheme.textSecondary,
+                    color: EthanTheme.textSecondary,
                     height: 1.45,
                   ),
                 ),
@@ -217,13 +217,13 @@ class _IntroSection extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            CotahubTheme.surface,
-            CotahubTheme.surfaceAlt,
-            CotahubTheme.surfaceSoft,
+            EthanTheme.surface,
+            EthanTheme.surfaceAlt,
+            EthanTheme.surfaceSoft,
           ],
         ),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,15 +234,15 @@ class _IntroSection extends StatelessWidget {
             children: [
               _SignalPill(
                 label: '$itemCount ${itemCount == 1 ? 'item' : 'itens'}',
-                color: CotahubTheme.blue,
+                color: EthanTheme.blue,
               ),
               const _SignalPill(
                 label: 'Imagem por item',
-                color: CotahubTheme.accent,
+                color: EthanTheme.accent,
               ),
               const _SignalPill(
                 label: 'Marca e modelo',
-                color: CotahubTheme.green,
+                color: EthanTheme.green,
               ),
             ],
           ),
@@ -253,14 +253,14 @@ class _IntroSection extends StatelessWidget {
               fontSize: 34,
               fontWeight: FontWeight.w900,
               height: 1.03,
-              color: CotahubTheme.textPrimary,
+              color: EthanTheme.textPrimary,
             ),
           ),
           const SizedBox(height: 12),
           const Text(
             'Cada item pode carregar contexto visual, referencia de marca e observacoes especificas. Isso eleva a qualidade da proposta que volta.',
             style: TextStyle(
-              color: CotahubTheme.textSecondary,
+              color: EthanTheme.textSecondary,
               fontSize: 16,
               height: 1.5,
             ),
@@ -269,7 +269,7 @@ class _IntroSection extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: onAddItem,
             style: OutlinedButton.styleFrom(
-              backgroundColor: CotahubTheme.surfaceAlt,
+              backgroundColor: EthanTheme.surfaceAlt,
             ),
             icon: const Icon(Icons.add_rounded),
             label: const Text('Adicionar item'),
@@ -300,9 +300,9 @@ class _QuotationItemFormCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CotahubTheme.surface,
+        color: EthanTheme.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CotahubTheme.line),
+        border: Border.all(color: EthanTheme.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,13 +315,13 @@ class _QuotationItemFormCard extends StatelessWidget {
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  color: CotahubTheme.surfaceAlt,
+                  color: EthanTheme.surfaceAlt,
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
                   'Item ${index + 1}',
                   style: const TextStyle(
-                    color: CotahubTheme.textPrimary,
+                    color: EthanTheme.textPrimary,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -331,9 +331,9 @@ class _QuotationItemFormCard extends StatelessWidget {
                 IconButton(
                   onPressed: onRemove,
                   style: IconButton.styleFrom(
-                    backgroundColor: CotahubTheme.surfaceAlt,
-                    foregroundColor: CotahubTheme.textSecondary,
-                    side: const BorderSide(color: CotahubTheme.line),
+                    backgroundColor: EthanTheme.surfaceAlt,
+                    foregroundColor: EthanTheme.textSecondary,
+                    side: const BorderSide(color: EthanTheme.line),
                   ),
                   icon: const Icon(Icons.delete_outline_rounded),
                 ),
@@ -436,10 +436,10 @@ class _ImagePreview extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [CotahubTheme.surfaceWarm, CotahubTheme.surfaceAlt],
+            colors: [EthanTheme.surfaceWarm, EthanTheme.surfaceAlt],
           ),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: CotahubTheme.line),
+          border: Border.all(color: EthanTheme.line),
         ),
         alignment: Alignment.bottomLeft,
         padding: const EdgeInsets.all(18),
@@ -449,7 +449,7 @@ class _ImagePreview extends StatelessWidget {
           children: [
             Icon(
               Icons.photo_library_outlined,
-              color: CotahubTheme.accent,
+              color: EthanTheme.accent,
               size: 28,
             ),
             SizedBox(height: 10),
@@ -458,13 +458,13 @@ class _ImagePreview extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: CotahubTheme.textPrimary,
+                color: EthanTheme.textPrimary,
               ),
             ),
             SizedBox(height: 6),
             Text(
               'Sem imagem, o pedido volta a depender demais de texto.',
-              style: TextStyle(color: CotahubTheme.textSecondary, height: 1.4),
+              style: TextStyle(color: EthanTheme.textSecondary, height: 1.4),
             ),
           ],
         ),
@@ -480,11 +480,11 @@ class _ImagePreview extends StatelessWidget {
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) {
             return Container(
-              color: CotahubTheme.surfaceAlt,
+              color: EthanTheme.surfaceAlt,
               alignment: Alignment.center,
               child: const Text(
                 'Imagem nao carregada',
-                style: TextStyle(color: CotahubTheme.textSecondary),
+                style: TextStyle(color: EthanTheme.textSecondary),
               ),
             );
           },

@@ -1,4 +1,4 @@
-import 'package:projeto_ethan/theme/cotahub_theme.dart';
+import 'package:ethan/theme/ethan_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +83,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     final email = FirebaseAuth.instance.currentUser?.email ?? 'sem e-mail';
 
     return Scaffold(
-      backgroundColor: CotahubTheme.background,
+      backgroundColor: EthanTheme.background,
       appBar: AppBar(
         title: const Text('Confirmar e-mail'),
         actions: [
@@ -103,9 +103,9 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: CotahubTheme.surface,
+                color: EthanTheme.surface,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: CotahubTheme.line),
+                border: Border.all(color: EthanTheme.line),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -116,14 +116,14 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w900,
-                      color: CotahubTheme.textPrimary,
+                      color: EthanTheme.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     'Conta: $email',
                     style: const TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -131,7 +131,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   const Text(
                     'Para liberar o app, confirme o e-mail enviado no cadastro. Sem confirmação, o acesso fica bloqueado.',
                     style: TextStyle(
-                      color: CotahubTheme.textSecondary,
+                      color: EthanTheme.textSecondary,
                       height: 1.5,
                     ),
                   ),
