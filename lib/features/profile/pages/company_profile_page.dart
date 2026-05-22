@@ -1,7 +1,7 @@
-import 'package:cotahub/features/support/pages/support_page.dart';
-import 'package:cotahub/models/user_profile.dart';
-import 'package:cotahub/repositories/user_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/features/support/pages/support_page.dart';
+import 'package:projeto_ethan/models/user_profile.dart';
+import 'package:projeto_ethan/repositories/user_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:flutter/material.dart';
 
 class CompanyProfilePage extends StatefulWidget {

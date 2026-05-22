@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:xml/xml.dart';
 
-import 'package:cotahub/models/invoice_xml_record.dart';
+import 'package:projeto_ethan/models/invoice_xml_record.dart';
 
 class InvoiceXmlRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -73,7 +73,7 @@ class InvoiceXmlRepository {
     final proposalContext = await _loadProposalContext(proposalId);
     final safeFileName = _sanitizeFileName(file.name);
     final storagePath =
-        'quotation_invoices/$quotationId/$proposalId/${DateTime.now().millisecondsSinceEpoch}_$safeFileName';
+        'quotation_invoices/$quotationId/$proposalId/${user.uid}/${DateTime.now().millisecondsSinceEpoch}_$safeFileName';
 
     final reference = storage.ref(storagePath);
     await reference.putData(
@@ -316,7 +316,12 @@ class InvoiceXmlRepository {
   }
 
   String _sanitizeFileName(String value) {
-    return value.replaceAll(RegExp(r'[^A-Za-z0-9._-]'), '_');
+    final sanitized = value.replaceAll(RegExp(r'[^A-Za-z0-9._-]'), '_');
+    if (sanitized.toLowerCase().endsWith('.xml')) {
+      final base = sanitized.substring(0, sanitized.length - 4);
+      return '$base.xml';
+    }
+    return '$sanitized.xml';
   }
 
   String _digitsOnly(String value) {

@@ -1,12 +1,12 @@
-import 'package:cotahub/models/invoice_xml_record.dart';
-import 'package:cotahub/models/proposal.dart';
-import 'package:cotahub/models/quotation.dart';
-import 'package:cotahub/models/quotation_item.dart';
-import 'package:cotahub/features/support/widgets/ai_assistant_fab.dart';
-import 'package:cotahub/repositories/invoice_xml_repository.dart';
-import 'package:cotahub/repositories/proposal_repository.dart';
-import 'package:cotahub/repositories/quotation_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/models/invoice_xml_record.dart';
+import 'package:projeto_ethan/models/proposal.dart';
+import 'package:projeto_ethan/models/quotation.dart';
+import 'package:projeto_ethan/models/quotation_item.dart';
+import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:projeto_ethan/repositories/invoice_xml_repository.dart';
+import 'package:projeto_ethan/repositories/proposal_repository.dart';
+import 'package:projeto_ethan/repositories/quotation_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:flutter/material.dart';
 
 class QuotationDetailsPage extends StatelessWidget {

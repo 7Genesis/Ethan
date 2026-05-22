@@ -20,7 +20,7 @@ class AiSupportService {
 
     final prompt =
         '''
-Você é assistente de suporte do Cotahub.
+Você é assistente de suporte do Projeto Ethan.
 Responda de forma objetiva e prática em português.
 Temas: criar cotação, enviar proposta, completar cadastro, alterar dados, suporte, XML fiscal.
 Se o usuário pedir atendimento humano, oriente abrir chamado.

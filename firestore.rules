@@ -184,6 +184,37 @@ service cloud.firestore {
         && isStringOrTimestamp(data.updatedAt);
     }
 
+    function validCompletedState(data) {
+      return (
+          data.profileCompleted == true
+          && data.registrationStage == 'active'
+          && data.identityVerificationStatus == 'verified'
+          && data.profileCompletedAt is timestamp
+        ) || (
+          data.profileCompleted == false
+          && data.profileCompletedAt == null
+        );
+    }
+
+    function preservesImmutableUserFields(before, after) {
+      return after.role == before.role
+        && after.createdAt == before.createdAt
+        && (
+          before.profileCompleted == true
+          ? (
+              after.entityType == before.entityType
+              && after.companyDocumentType == before.companyDocumentType
+              && after.companyTaxId == before.companyTaxId
+            )
+          : true
+        )
+        && (
+          before.profileCompletedAt != null
+          ? after.profileCompletedAt == before.profileCompletedAt
+          : true
+        );
+    }
+
     function isQuotationBuyer(quotationId) {
       return isSignedIn()
         && exists(quotationPath(quotationId))
@@ -202,6 +233,7 @@ service cloud.firestore {
       allow create: if isOwner(userId)
         && validUserKeys(request.resource.data)
         && validUserTypes(request.resource.data)
+        && validCompletedState(request.resource.data)
         && isRole(request.resource.data.role)
         && isEntityType(request.resource.data.entityType)
         && isCompanyDocumentType(request.resource.data.companyDocumentType)
@@ -215,6 +247,8 @@ service cloud.firestore {
       allow update: if isOwner(userId)
         && hasUserRequiredKeys(request.resource.data)
         && validUserTypes(request.resource.data)
+        && validCompletedState(request.resource.data)
+        && preservesImmutableUserFields(resource.data, request.resource.data)
         && isRole(request.resource.data.role)
         && isEntityType(request.resource.data.entityType)
         && isCompanyDocumentType(request.resource.data.companyDocumentType)

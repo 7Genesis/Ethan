@@ -1,6 +1,6 @@
-import 'package:cotahub/repositories/support_ticket_repository.dart';
-import 'package:cotahub/services/ai_support_service.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/repositories/support_ticket_repository.dart';
+import 'package:projeto_ethan/services/ai_support_service.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:flutter/material.dart';
 
 class AiAssistantFab extends StatelessWidget {
@@ -130,7 +130,7 @@ class _AiSupportSheetState extends State<_AiSupportSheet> {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Assistente Cotahub',
+                'Assistente Ethan',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,

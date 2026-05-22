@@ -1,24 +1,75 @@
-import 'package:cotahub/features/auth/pages/complete_profile_page.dart';
-import 'package:cotahub/features/auth/pages/email_verification_page.dart';
-import 'package:cotahub/features/auth/pages/login_page.dart';
-import 'package:cotahub/features/home/pages/home_page.dart';
-import 'package:cotahub/features/supplier/pages/supplier_home_page.dart';
-import 'package:cotahub/firebase_options.dart';
-import 'package:cotahub/models/user_profile.dart';
-import 'package:cotahub/repositories/user_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/features/auth/pages/complete_profile_page.dart';
+import 'package:projeto_ethan/features/auth/pages/email_verification_page.dart';
+import 'package:projeto_ethan/features/auth/pages/login_page.dart';
+import 'package:projeto_ethan/features/home/pages/home_page.dart';
+import 'package:projeto_ethan/features/supplier/pages/supplier_home_page.dart';
+import 'package:projeto_ethan/firebase_options.dart';
+import 'package:projeto_ethan/models/user_profile.dart';
+import 'package:projeto_ethan/repositories/user_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+void _debugMainLog(String message) {
+  if (kDebugMode) {
+    debugPrint(message);
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const CotahubApp());
+  await _activateFirebaseAppCheck();
+  runApp(const ProjetoEthanApp());
 }
 
-class CotahubApp extends StatelessWidget {
-  const CotahubApp({super.key});
+Future<void> _activateFirebaseAppCheck() async {
+  final AndroidAppCheckProvider androidProvider = kDebugMode
+      ? const AndroidDebugProvider()
+      : const AndroidPlayIntegrityProvider();
+  final AppleAppCheckProvider appleProvider = kDebugMode
+      ? const AppleDebugProvider()
+      : const AppleAppAttestWithDeviceCheckFallbackProvider();
+
+  if (kIsWeb) {
+    const recaptchaSiteKey = String.fromEnvironment(
+      'FIREBASE_APPCHECK_RECAPTCHA_SITE_KEY',
+      defaultValue: '',
+    );
+
+    if (recaptchaSiteKey.isEmpty) {
+      if (kDebugMode) {
+        debugPrint(
+          '[appCheck] skipped on web: missing FIREBASE_APPCHECK_RECAPTCHA_SITE_KEY',
+        );
+        return;
+      }
+      throw StateError(
+        'Missing FIREBASE_APPCHECK_RECAPTCHA_SITE_KEY for web App Check.',
+      );
+    }
+
+    await FirebaseAppCheck.instance.activate(
+      providerWeb: ReCaptchaV3Provider(recaptchaSiteKey),
+      providerAndroid: androidProvider,
+      providerApple: appleProvider,
+    );
+    await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+    return;
+  }
+
+  await FirebaseAppCheck.instance.activate(
+    providerAndroid: androidProvider,
+    providerApple: appleProvider,
+  );
+  await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+}
+
+class ProjetoEthanApp extends StatelessWidget {
+  const ProjetoEthanApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +77,7 @@ class CotahubApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Cotahub',
+      title: 'Projeto Ethan',
       theme: CotahubTheme.buildTheme(),
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.userChanges(),
@@ -36,6 +87,7 @@ class CotahubApp extends StatelessWidget {
           }
 
           final authUser = authSnapshot.data;
+          _debugMainLog('[main.authGate] uid=${authUser?.uid}');
           if (authUser == null) {
             return const LoginPage();
           }
@@ -52,6 +104,9 @@ class CotahubApp extends StatelessWidget {
               }
 
               final profile = profileSnapshot.data;
+              _debugMainLog(
+                '[main.profileGate] uid=${authUser.uid} profileExists=${profile != null} profileCompleted=${profile?.profileCompleted} role=${profile?.role}',
+              );
 
               if (profile == null) {
                 return const CompleteProfilePage();

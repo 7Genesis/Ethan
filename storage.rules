@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function quotationPath(quotationId) {
+      return /databases/(default)/documents/quotations/$(quotationId);
+    }
+
+    function proposalPath(proposalId) {
+      return /databases/(default)/documents/proposals/$(proposalId);
+    }
+
+    function quotationDoc(quotationId) {
+      return firestore.get(quotationPath(quotationId));
+    }
+
+    function proposalDoc(proposalId) {
+      return firestore.get(proposalPath(proposalId));
+    }
+
+    function canReadInvoiceFile(quotationId, proposalId, supplierId) {
+      return isSignedIn()
+        && (
+          request.auth.uid == supplierId
+          || (
+            firestore.exists(quotationPath(quotationId))
+            && quotationDoc(quotationId).data.buyerId == request.auth.uid
+          )
+          || (
+            firestore.exists(proposalPath(proposalId))
+            && proposalDoc(proposalId).data.supplierId == request.auth.uid
+          )
+        );
+    }
+
+    function canWriteInvoiceFile(quotationId, proposalId, supplierId, fileName) {
+      return isSignedIn()
+        && request.resource != null
+        && request.auth.uid == supplierId
+        && fileName.matches('^.*\\.xml$')
+        && request.resource.size < 10 * 1024 * 1024
+        && (
+          request.resource.contentType.matches('^application/xml(;.*)?$')
+          || request.resource.contentType.matches('^text/xml(;.*)?$')
+          || request.resource.contentType.matches('^application/octet-stream(;.*)?$')
+        )
+        && firestore.exists(proposalPath(proposalId))
+        && proposalDoc(proposalId).data.quotationId == quotationId
+        && proposalDoc(proposalId).data.supplierId == request.auth.uid
+        && proposalDoc(proposalId).data.status == 'accepted'
+        && firestore.exists(quotationPath(quotationId))
+        && quotationDoc(quotationId).data.status == 'closed'
+        && quotationDoc(quotationId).data.selectedProposalId == proposalId
+        && quotationDoc(quotationId).data.selectedSupplierId == request.auth.uid;
+    }
+
+    match /quotation_invoices/{quotationId}/{proposalId}/{supplierId}/{fileName} {
+      allow read: if canReadInvoiceFile(quotationId, proposalId, supplierId);
+      allow write: if canWriteInvoiceFile(quotationId, proposalId, supplierId, fileName);
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

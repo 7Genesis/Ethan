@@ -1,4 +1,4 @@
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

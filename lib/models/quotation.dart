@@ -1,4 +1,4 @@
-import 'package:cotahub/models/quotation_item.dart';
+import 'package:projeto_ethan/models/quotation_item.dart';
 
 class Quotation {
   final String id;

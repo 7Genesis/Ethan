@@ -1,6 +1,6 @@
-import 'package:cotahub/models/support_ticket.dart';
-import 'package:cotahub/repositories/support_ticket_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/models/support_ticket.dart';
+import 'package:projeto_ethan/repositories/support_ticket_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:flutter/material.dart';
 
 class SupportPage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:cotahub/models/app_notification.dart';
+import 'package:projeto_ethan/models/app_notification.dart';
 
 class NotificationRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;

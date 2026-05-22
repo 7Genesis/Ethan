@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:cotahub/models/support_ticket.dart';
-import 'package:cotahub/repositories/user_repository.dart';
+import 'package:projeto_ethan/models/support_ticket.dart';
+import 'package:projeto_ethan/repositories/user_repository.dart';
 
 class SupportTicketRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseFunctions functions = FirebaseFunctions.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   final UserRepository userRepository = UserRepository();
 
@@ -43,10 +45,31 @@ class SupportTicketRepository {
       throw Exception('Descreva o problema para abrir o chamado.');
     }
 
+    try {
+      final callable = functions.httpsCallable('createSupportTicket');
+      final response = await callable.call({
+        'category': normalizedCategory,
+        'message': trimmedMessage,
+      });
+      final data = Map<String, dynamic>.from(response.data as Map);
+      _log(
+        '[createSupportTicket] source=callable category=$normalizedCategory ticketId=${(data['ticketId'] ?? '').toString()} status=${(data['status'] ?? '').toString()}',
+      );
+      return;
+    } on FirebaseFunctionsException catch (error) {
+      if (error.code != 'not-found' && error.code != 'unavailable') {
+        rethrow;
+      }
+      _log(
+        '[createSupportTicket] callable_fallback code=${error.code} message=${error.message}',
+      );
+    }
+
     final profile = await userRepository.getCurrentUserProfile();
     final now = Timestamp.now();
+    final docRef = firestore.collection('support_tickets').doc();
 
-    await firestore.collection('support_tickets').add({
+    await docRef.set({
       'userId': user.uid,
       'userEmail': user.email ?? '',
       'companyName': profile?.companyName ?? '',
@@ -57,7 +80,9 @@ class SupportTicketRepository {
       'updatedAt': now,
     });
 
-    _log('[createSupportTicket] category=$normalizedCategory status=open');
+    _log(
+      '[createSupportTicket] source=firestore_fallback category=$normalizedCategory ticketId=${docRef.id} status=open',
+    );
   }
 
   Stream<List<SupportTicket>> currentUserTickets() {

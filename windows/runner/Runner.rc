@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "cotahub" "\0"
+            VALUE "FileDescription", "Projeto Ethan" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "cotahub" "\0"
+            VALUE "InternalName", "projeto_ethan" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "cotahub.exe" "\0"
-            VALUE "ProductName", "cotahub" "\0"
+            VALUE "OriginalFilename", "projeto_ethan.exe" "\0"
+            VALUE "ProductName", "Projeto Ethan" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

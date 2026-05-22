@@ -1,9 +1,9 @@
-import 'package:cotahub/features/home/pages/home_page.dart';
-import 'package:cotahub/features/supplier/pages/supplier_home_page.dart';
-import 'package:cotahub/models/user_profile.dart';
-import 'package:cotahub/core/validators/br_documents.dart';
-import 'package:cotahub/repositories/user_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/features/home/pages/home_page.dart';
+import 'package:projeto_ethan/features/supplier/pages/supplier_home_page.dart';
+import 'package:projeto_ethan/models/user_profile.dart';
+import 'package:projeto_ethan/core/validators/br_documents.dart';
+import 'package:projeto_ethan/repositories/user_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';

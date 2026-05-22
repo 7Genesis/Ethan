@@ -78,5 +78,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'cotahub-brasil-genesis.firebasestorage.app',
     measurementId: 'G-JY4X2H5TQN',
   );
-
 }

@@ -1,15 +1,15 @@
-import 'package:cotahub/models/invoice_xml_record.dart';
-import 'package:cotahub/models/app_notification.dart';
-import 'package:cotahub/models/proposal.dart';
-import 'package:cotahub/models/quotation.dart';
-import 'package:cotahub/features/profile/pages/company_profile_page.dart';
-import 'package:cotahub/features/support/pages/support_page.dart';
-import 'package:cotahub/features/support/widgets/ai_assistant_fab.dart';
-import 'package:cotahub/repositories/invoice_xml_repository.dart';
-import 'package:cotahub/repositories/notification_repository.dart';
-import 'package:cotahub/repositories/proposal_repository.dart';
-import 'package:cotahub/repositories/quotation_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/models/invoice_xml_record.dart';
+import 'package:projeto_ethan/models/app_notification.dart';
+import 'package:projeto_ethan/models/proposal.dart';
+import 'package:projeto_ethan/models/quotation.dart';
+import 'package:projeto_ethan/features/profile/pages/company_profile_page.dart';
+import 'package:projeto_ethan/features/support/pages/support_page.dart';
+import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:projeto_ethan/repositories/invoice_xml_repository.dart';
+import 'package:projeto_ethan/repositories/notification_repository.dart';
+import 'package:projeto_ethan/repositories/proposal_repository.dart';
+import 'package:projeto_ethan/repositories/quotation_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -343,7 +343,7 @@ class _SupplierTopBar extends StatelessWidget {
         const SizedBox(width: 12),
         const Expanded(
           child: Text(
-            'Cotahub',
+            'Projeto Ethan',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,

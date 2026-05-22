@@ -1,4 +1,4 @@
-name: cotahub
+name: projeto_ethan
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -44,6 +44,7 @@ dependencies:
   xml: ^6.5.0
   http: ^1.2.2
   shared_preferences: ^2.5.3
+  firebase_app_check: ^0.4.4+1
 
 dev_dependencies:
   flutter_test:

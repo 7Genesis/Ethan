@@ -1,1 +1,50 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"cotahub-brasil-genesis","appId":"1:116870087879:android:84ef17373cffed6745aae2","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"cotahub-brasil-genesis","appId":"1:116870087879:ios:f2e68f8461031fcd45aae2","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"cotahub-brasil-genesis","appId":"1:116870087879:ios:f2e68f8461031fcd45aae2","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"cotahub-brasil-genesis","configurations":{"android":"1:116870087879:android:84ef17373cffed6745aae2","ios":"1:116870087879:ios:f2e68f8461031fcd45aae2","web":"1:116870087879:web:be056b625f0ae2eb45aae2"}}}}}}
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "functions": [
+    {
+      "source": "functions"
+    }
+  ],
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "cotahub-brasil-genesis",
+          "appId": "1:116870087879:android:84ef17373cffed6745aae2",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "cotahub-brasil-genesis",
+          "appId": "1:116870087879:ios:f2e68f8461031fcd45aae2",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "cotahub-brasil-genesis",
+          "appId": "1:116870087879:ios:f2e68f8461031fcd45aae2",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "cotahub-brasil-genesis",
+          "configurations": {
+            "android": "1:116870087879:android:84ef17373cffed6745aae2",
+            "ios": "1:116870087879:ios:f2e68f8461031fcd45aae2",
+            "web": "1:116870087879:web:be056b625f0ae2eb45aae2"
+          }
+        }
+      }
+    }
+  }
+}

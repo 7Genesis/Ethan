@@ -3,8 +3,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:cotahub/core/validators/br_documents.dart';
-import 'package:cotahub/models/user_profile.dart';
+import 'package:projeto_ethan/core/validators/br_documents.dart';
+import 'package:projeto_ethan/models/user_profile.dart';
 
 class UserRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -24,18 +24,19 @@ class UserRepository {
 
     final userRef = firestore.collection('users').doc(user.uid);
     final doc = await userRef.get();
+    final docExists = doc.exists;
     _log(
-      '[ensureUserProfileDocument] doc.exists=${doc.exists} roleHint=${_normalizeRole(roleHint)}',
+      '[ensureUserProfileDocument] uid=${user.uid} doc.exists=$docExists roleHint=${_normalizeRole(roleHint)}',
     );
 
-    if (doc.exists) {
+    if (docExists) {
       return;
     }
 
     final role = _normalizeRole(roleHint);
     final now = Timestamp.now();
 
-    await userRef.set({
+    final seedPayload = {
       'email': user.email ?? '',
       'role': role,
       'companyName': '',
@@ -55,6 +56,17 @@ class UserRepository {
       'profileCompletedAt': null,
       'createdAt': now,
       'updatedAt': now,
+    };
+
+    await firestore.runTransaction((transaction) async {
+      final latest = await transaction.get(userRef);
+      if (latest.exists) {
+        _log(
+          '[ensureUserProfileDocument] uid=${user.uid} status=already-exists skip-create',
+        );
+        return;
+      }
+      transaction.set(userRef, seedPayload);
     });
   }
 
@@ -135,7 +147,7 @@ class UserRepository {
     );
 
     _log(
-      '[saveCurrentUserProfile] profileCompleted=${map['profileCompleted']} role=$normalizedRole',
+      '[saveCurrentUserProfile] uid=${user.uid} email=${user.email ?? ''} profileCompleted=${map['profileCompleted']} role=$normalizedRole',
     );
 
     try {
@@ -156,14 +168,19 @@ class UserRepository {
     DocumentSnapshot<Map<String, dynamic>> verifiedDoc;
     try {
       verifiedDoc = await userRef.get(const GetOptions(source: Source.server));
-    } catch (_) {
-      verifiedDoc = await userRef.get();
+    } on FirebaseException catch (error) {
+      _log(
+        '[saveCurrentUserProfile.verifyError] code=${error.code} message=${error.message}',
+      );
+      throw Exception(
+        'Cadastro salvo, mas sem confirmacao no servidor. Verifique conexao/regras e tente novamente.',
+      );
     }
 
     final verifiedData = verifiedDoc.data();
     final profileCompleted = verifiedData?['profileCompleted'] == true;
     _log(
-      '[saveCurrentUserProfile.verify] doc.exists=${verifiedDoc.exists} profileCompleted=$profileCompleted role=${(verifiedData?['role'] ?? '').toString()}',
+      '[saveCurrentUserProfile.verify] uid=${user.uid} email=${user.email ?? ''} doc.exists=${verifiedDoc.exists} profileCompleted=$profileCompleted role=${(verifiedData?['role'] ?? '').toString()}',
     );
 
     if (!verifiedDoc.exists || !profileCompleted) {
@@ -237,7 +254,7 @@ class UserRepository {
           final hasPendingWrites = doc.metadata.hasPendingWrites;
 
           _log(
-            '[currentUserProfileStream] doc.exists=${doc.exists} localProfileCompleted=$localProfileCompleted role=$role fromCache=$fromCache hasPendingWrites=$hasPendingWrites',
+            '[currentUserProfileStream] uid=${user.uid} email=${user.email ?? ''} doc.exists=${doc.exists} localProfileCompleted=$localProfileCompleted role=$role fromCache=$fromCache hasPendingWrites=$hasPendingWrites',
           );
 
           if (!doc.exists) {
@@ -259,7 +276,7 @@ class UserRepository {
                 serverData?['profileCompleted'] == true;
 
             _log(
-              '[currentUserProfileStream.serverCheck] doc.exists=${serverDoc.exists} serverProfileCompleted=$serverProfileCompleted role=${_normalizeRole((serverData?['role'] ?? '').toString())}',
+              '[currentUserProfileStream.serverCheck] uid=${user.uid} email=${user.email ?? ''} doc.exists=${serverDoc.exists} serverProfileCompleted=$serverProfileCompleted role=${_normalizeRole((serverData?['role'] ?? '').toString())}',
             );
 
             if (serverDoc.exists && serverProfileCompleted) {

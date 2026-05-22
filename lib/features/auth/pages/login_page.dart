@@ -1,5 +1,5 @@
-import 'package:cotahub/repositories/user_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/repositories/user_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
@@ -261,7 +261,7 @@ class _BrandBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Cotahub',
+              'Projeto Ethan',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w900,

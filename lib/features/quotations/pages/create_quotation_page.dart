@@ -1,8 +1,8 @@
-import 'package:cotahub/models/quotation.dart';
-import 'package:cotahub/models/quotation_item.dart';
-import 'package:cotahub/features/support/widgets/ai_assistant_fab.dart';
-import 'package:cotahub/repositories/quotation_repository.dart';
-import 'package:cotahub/theme/cotahub_theme.dart';
+import 'package:projeto_ethan/models/quotation.dart';
+import 'package:projeto_ethan/models/quotation_item.dart';
+import 'package:projeto_ethan/features/support/widgets/ai_assistant_fab.dart';
+import 'package:projeto_ethan/repositories/quotation_repository.dart';
+import 'package:projeto_ethan/theme/cotahub_theme.dart';
 import 'package:flutter/material.dart';
 
 class CreateQuotationPage extends StatefulWidget {

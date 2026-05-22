@@ -1,6 +1,6 @@
-# Cotahub
+# Projeto Ethan
 
-Cotahub is a B2B procurement workflow platform that connects buyers and suppliers
+Projeto Ethan is a B2B procurement workflow platform that connects buyers and suppliers
 from quotation to fiscal validation in one auditable flow.
 
 Core capabilities:
@@ -22,7 +22,7 @@ spreadsheets, and disconnected systems. The result is predictable:
 - manual rework at purchase close;
 - fiscal validation risk and delayed approvals.
 
-Cotahub addresses this by centralizing commercial negotiation and fiscal
+Projeto Ethan addresses this by centralizing commercial negotiation and fiscal
 compliance in a single operational product.
 
 ## Product intent
