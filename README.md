@@ -94,7 +94,7 @@ Hoje existe um único teste (`test/widget_test.dart`), um smoke test de renderiz
 
 ## Estado do projeto
 
-Projeto em desenvolvimento, versão `1.0.0+1`, sem deploy público nem demonstração publicada. Este repositório não inclui capturas de tela.
+Experimento em avaliação: o rumo do projeto ainda está em definição, e o projeto Firebase configurado em `android/app/google-services.json` e `lib/firebase_options.dart` é um ambiente de teste. Versão `1.0.0+1`, sem deploy público nem demonstração publicada. Este repositório não inclui capturas de tela.
 
 Limitações conhecidas:
 
